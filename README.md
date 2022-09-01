@@ -61,19 +61,20 @@ Open the `server` and `client` in separate VSCode workspaces or open the combine
 
 ### Purpose
 
-The purpose of the system created is intended to be that of a management system for the staff of university, or another similar institution. As a part of this, the system will allow for appropriate staff to create accounts to manage, among others, their personal schedules, courses, and salaries, as well as communicate amongst each other. Furthermore, the system will facilitate staff managing courses, each of which shall have belonging to it a number of students, with all their relevant data. Both courses and staff will be assigned a department, and users with special privileges will be able to manage relevant data at the department level. Finally, departments will belong to a university, which much like the departments themselves will provide the opportunity of management of all its component parts.
+The purpose of the system created is intended to be that of a management system for the staff of university, or another similar institution. As a part of this, the system will allow for appropriate staff to create accounts to manage, among others, their personal schedules, courses, and salaries, as well as communicate amongst each other. Furthermore, the system will facilitate staff managing courses, each of which shall have belonging to it a number of students, with all their relevant data and both courses and staff will be assigned a department.
 
 ### Pages
 
-* Login: Select privilege level for the login (staff, department, university), and confirm relevant credentials. Alternatively, the user can create a new account.
-* Staff Dashboard: Provides an overview of taught courses, as well as access to a timetable, and salary options.
-* Course Overview: Provides a summary of all the relevant course data, including assigned staff and departments, with the ability to manage and add individual students.
-* Department Overview: Provides a summary of the relevant department data, including staff, courses, and their pairing, with the ability to add new staff or create new courses. Only accessible with the correct account privileges
-* University Overview: Provides a summary of the relevant university data, including departments, and through them their staff and courses, and allows for creation of new departments. Only accessible with the correct account privileges.
+* Login: Login with the provided credentials. Alternatively, the user can create a new account.
+* Staff Dashboard: Provides an overview of taught courses and salary information.
+* Course Overview: Provides a summary of all the relevant course data, including assigned staff, departments and students.
+* Colleagues page: Provides a list of collegues in the related department and their contact information.
+* Calandar page: Provides a calandar and possibly with the ability to add events to the calandar.
+* Vacation days: A page where staff can submit their Vacation days in the system.
 
 ### Entity-Relationship (ER) Diagram
 
-![ER Diagram](./images/er_diagram.png)
+![ER Diagram](./images/ER_diagram.png)
 
 ## Teaser (MS3)
 
