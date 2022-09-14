@@ -4,6 +4,13 @@ var morgan = require('morgan');
 var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
+var staffsController = require('./controllers/staffs');
+var coursesController = require('./controllers/courses');
+var departmentsController = require('./controllers/departments');
+var studentsController = require('./controllers/students');
+
+//var methodOverride = require('method-override');
+
 
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
@@ -34,6 +41,16 @@ app.use(cors());
 app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT342 backend ExpressJS project!'});
 });
+
+app.use(staffsController);
+app.use(coursesController);
+app.use(departmentsController);
+app.use(studentsController);
+
+
+// override with the X-HTTP-Method-Override header in the request
+//app.use(methodOverride('X-HTTP-Method-Override'));
+
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
