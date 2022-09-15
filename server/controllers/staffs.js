@@ -79,9 +79,9 @@ router.put('/api/staffs/:id', function(req, res,next) {
 });
 
 router.delete('/api/staffs', function(req,res,next){
-    Staff.delete(function(err, staffs) {
+    Staff.deleteMany(function(err, staffs) {
         if (err) { return next(err); }
-        res.status(201).json(staffs);
+        res.status(200).json(staffs);
     });
 });
 router.delete('/api/staffs/:id', function(req, res, next) {

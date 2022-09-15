@@ -9,7 +9,7 @@ var courseSchema = new Schema({
         ref: "department" },
     students: [{
         type: Schema.Types.ObjectId,
-        ref: "course"
+        ref: "student"
      }],
      staffs: [{
         type: Schema.Types.ObjectId,

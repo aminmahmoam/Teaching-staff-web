@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "f7ee95b5-9cb9-442f-a6a9-42de46138872",
+		"_postman_id": "268333ff-2df6-46b3-845a-513abc5ad744",
 		"name": "server",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23102291"
 	},
 	"item": [
 		{
@@ -11,7 +12,88 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "b58d92ec-5214-450c-adb0-28e068aa71b9",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/courses/6322202b2d87d5a395655a33/students/6322206c2d87d5a395655a37",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"6322202b2d87d5a395655a33",
+						"students",
+						"6322206c2d87d5a395655a37"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post a course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"DIT222\",\n    \"name\": \"Data Structure\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/courses",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all courses",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
 						"exec": [
 							""
 						],
@@ -29,12 +111,1481 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}/api",
+					"raw": "{{host}}/api/courses",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"api"
+						"api",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a specific course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/courses/6322202b2d87d5a395655a33",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"6322202b2d87d5a395655a33"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch a specific course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Updated Data Structure\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/courses/{{course_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"{{course_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put a specific course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"DIT333\",\n    \"name\": \"Updated Data Structure V2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/courses/{{course_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"{{course_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a specific course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/courses/{{course_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"{{course_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all courses",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/courses/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post a staff for a course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"SSN\" :\"40000000-000\",\n\"firstName\" : \"Emrik\",\n\"lastName\":\"Dunvald\",\n\"educationalDegree\": \"Master\",\n\"role\": \"teacher\",\n\"salary\": 10000.00,\n\"telephone\": 7654637218,\n\"emailAddress\": \"Emrik@student.gu.se\",\n\"address\": \"Oplagatan\",\n\"password\": \"0000\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/courses/6321b2b70115aa8034c46b02/staffs",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"6321b2b70115aa8034c46b02",
+						"staffs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all staffs of a course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/courses/6321b2b70115aa8034c46b02/staffs",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"6321b2b70115aa8034c46b02",
+						"staffs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a specific staff of a course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/courses/6321b2b70115aa8034c46b02/staffs/6321ba80719b228191f04fd2",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"6321b2b70115aa8034c46b02",
+						"staffs",
+						"6321ba80719b228191f04fd2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post a specific student for a course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"SSN\": \"111111-1111\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Anderson\",\n    \"emailAddress\": \"john@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/courses/6321b2b70115aa8034c46b02/students",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"6321b2b70115aa8034c46b02",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post department of a course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"B1\",\n    \"campus\": \"Lindholmen\",\n    \"name\": \"Business\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/courses/6321b2b70115aa8034c46b02/departments",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"6321b2b70115aa8034c46b02",
+						"departments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get the department of a course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/courses/6321b2b70115aa8034c46b02/departments",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"6321b2b70115aa8034c46b02",
+						"departments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post a department",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"B2\",\n    \"campus\": \"Lindholmen\",\n    \"name\": \"Biomedicine\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/departments",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"departments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all departments",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"B2\",\n    \"campus\": \"Lindholmen\",\n    \"name\": \"Biomedicine\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/departments",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"departments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a specific department",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/departments/6321db0bc0105e85d83d25a9",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"departments",
+						"6321db0bc0105e85d83d25a9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch a specific department",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"B11\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/departments/6321db0bc0105e85d83d25a9",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"departments",
+						"6321db0bc0105e85d83d25a9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put a specific department",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"B22\",\n    \"campus\": \"Johanebarg\",\n    \"name\": \"Biomedicine\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/departments/6321db0bc0105e85d83d25a9",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"departments",
+						"6321db0bc0105e85d83d25a9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a specific department",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/departments/6321e46658539d88775f4719",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"departments",
+						"6321e46658539d88775f4719"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all departments",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/departments",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"departments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post a staff",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/staffs",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staffs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all staffs",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/staffs",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staffs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a specific staff",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/staffs/6321fbd44cc3ee9edad7e078",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staffs",
+						"6321fbd44cc3ee9edad7e078"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch a specific staff",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"lastName\": \"Jackson\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/staffs/6321fbd44cc3ee9edad7e078",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staffs",
+						"6321fbd44cc3ee9edad7e078"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put a specific staff",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"SSN\": \"00000000-000\",\n    \"firstName\": \"Anna\",\n    \"lastName\": \"fard\",\n    \"educationalDegree\": \"phd\",\n    \"role\": \"TA\",\n    \"salary\": 50000,\n    \"telephone\": 7600000001,\n    \"emailAddress\": \"anna@gmail.com\",\n    \"address\": \"mandolingatan 50\",\n    \"password\": \"2222\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/staffs/6321fbd44cc3ee9edad7e078",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staffs",
+						"6321fbd44cc3ee9edad7e078"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a specific staff",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/staffs/6321fbd44cc3ee9edad7e078",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staffs",
+						"6321fbd44cc3ee9edad7e078"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all staffs",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/staffs",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staffs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post a student",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"SSN\": \"657483-0123\",\n    \"firstName\": \"jesus\",\n    \"lastName\": \"christ\",\n    \"emailAddress\": \"jesus@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/students",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all students",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/students",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a specific student",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/students/6321c515c1eb5483be2620d5",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"students",
+						"6321c515c1eb5483be2620d5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch a specific student",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailAddress\": \"jesus@icloud.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/students/6321c515c1eb5483be2620d5",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"students",
+						"6321c515c1eb5483be2620d5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put a specific student",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"SSN\": \"657483-0123\",\n    \"firstName\": \"jesus\",\n    \"lastName\": \"christ\",\n    \"emailAddress\": \"jesus@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/students/6321c515c1eb5483be2620d5",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"students",
+						"6321c515c1eb5483be2620d5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a specific student",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/students/6321c515c1eb5483be2620d5",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"students",
+						"6321c515c1eb5483be2620d5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all students",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/students",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a specific student of a course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/courses/6322202b2d87d5a395655a33/students/6322c3a937b829a9af52bf82",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"6322202b2d87d5a395655a33",
+						"students",
+						"6322c3a937b829a9af52bf82"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a specific staff of a course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/courses/6322202b2d87d5a395655a33/staffs/63230d62263dcbb8662a2198",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"6322202b2d87d5a395655a33",
+						"staffs",
+						"63230d62263dcbb8662a2198"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all students of a course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/courses/6322202b2d87d5a395655a33/students",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"6322202b2d87d5a395655a33",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a specific staff of a course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/courses/6322202b2d87d5a395655a33/staffs/632220a62d87d5a395655a3d",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"6322202b2d87d5a395655a33",
+						"staffs",
+						"632220a62d87d5a395655a3d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a specific student for a course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/courses/6322202b2d87d5a395655a33/students/6322206c2d87d5a395655a37",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"6322202b2d87d5a395655a33",
+						"students",
+						"6322206c2d87d5a395655a37"
 					]
 				}
 			},
@@ -45,7 +1596,6 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "05864cff-5cba-4070-bac3-a59328954ebf",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -55,7 +1605,6 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "e9c319be-3306-4fc5-ba34-fcf64391213a",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -65,11 +1614,9 @@
 	],
 	"variable": [
 		{
-			"id": "cd185905-a834-4211-8030-583d17702534",
 			"key": "host",
 			"value": "http://localhost:3000",
 			"type": "string"
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

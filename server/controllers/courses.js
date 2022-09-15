@@ -29,7 +29,7 @@ router.get('/api/courses', function(req, res, next) {
 
 router.get("/api/courses/:id", function (req, res, next) {
   Course.findOne({ _id: req.params.id })
-    .populate("students")
+    .populate("students") //doesn't return the students, returns empty
     .populate("staffs")
     .exec(function (err, course) {
       if (err) {
@@ -94,23 +94,39 @@ router.delete('/api/courses/:id', function(req, res, next) {
     });
 });
 
-//task 3 ⛔️
+//task 3 
 router.get("/api/courses/:co_id/staffs/:st_id", function (req, res, next) {
+  /*Staff.findOne({courses: req.params.co_id})
+  .where({_id: req.params.st_id})
+  .exec(function (err, staff){
+    if(err) {
+      return res.status(500).send(err);
+    }
+    if (staff === null){
+      return res.status(404).json({message: "Staff not found!"});
+    }
+    return res.status(200).send(staff);
+  });
+});
+*/
     Course.findOne({ _id: req.params.co_id })
-      .populate("staffs", {
-        match: { _id: { $ne: req.params.st_id } },
+      .populate({path: "staffs", 
+        match: { _id: { $eq: req.params.st_id } },
       })
-      .exec(function (err, course) {    
-        if (err) {
-          return res.status(500).send(err);
-        }
+      .exec(function (err, course, staff) {   
         if (course === null || staff === null) {
-            return res.status(404).json({'message': 'Not found!'});
-        }
+          return res.status(404).json({'message': 'Not found!'});
+      }
+      console.log("everything good sofar!"); 
+        if (err) {
+          return res.status(500).send(err);   //returns this error
+        } 
         console.log(course.staffs);
         return res.status(200).send(course.staffs);
+        
     });
 });
+
 
 //task 3
 router.get('/api/courses/:id/staffs', function(req, res, next){
@@ -149,23 +165,24 @@ router.post("/api/courses/:id/staffs", function (req, res, next) {
   });
   
   
-//task 3 ⛔️
-router.delete("/api/courses/:co_id/staffs/:staff_id",function (req, res, next) {
-    Course.updateOne(
-        { _id: req.params.co_id },
-        { $pull: { staffs: { _id: req.params.staff_id } } },
-        function (err, course) {
-        if (err) {
-            return res.status(500).send(err);
-        }
-        if (course == null) {
-            return res.status(404).json({ message: "Course not found" });
-        }
-        res.status(200).json(course);
+//task 3 
+router.delete("/api/courses/:co_id/staffs/:staff_id", function (req, res, next) {
+    Course.findByIdAndUpdate({_id: req.params.co_id})
+    .populate("staffs")
+    .exec(function (err, course, staff){
+      if(err) {
+        return res.status(500).send(err);
+      }
+      if(course === null || staff === null){
+        return res.status(404).json({message: "Not found!"});
+      }
+      course.staffs.pull({_id: req.params.staff_id});
+      course.save();
+      return res.status(200).send(course.staffs);
     });
 });
 
-//task 3
+//task 3 
 router.get('/api/courses/:id/students', function(req, res, next){
     Course.findOne({_id: req.params.id})
     .populate('students').exec(function(err, course) {
@@ -178,41 +195,43 @@ router.get('/api/courses/:id/students', function(req, res, next){
     });
 });
 
-//task 3
+//task 3 
 router.get("/api/courses/:co_id/students/:st_id", function (req, res, next) {
-    Course.findById({ _id: req.params.co_id })
-      .populate("students", {
-        match: { _id: { $ne: req.params.st_id } },
+    Course.findOne({ _id: req.params.co_id })
+      .populate({path: "students", 
+        match: { _id: { $eq: req.params.st_id } },
       })
       .exec(function (err, course, student) {
-        if (err) {
-          return res.status(500).send(err);
-        }
         if (course === null || student === null) {
-            return res.status(404).json({'message': 'Not found!'});
-        }
-        console.log(course.student);
-        return res.status(200).json(course.student);
-      });
-});
-
-  //task 3
-router.delete("/api/courses/:co_id/students/:student_id",function (req, res, next) {
-    Course.updateOne(
-      { _id: req.params.co_id },
-      { $pull: { students: { _id: req.params.student_id } } },
-      function (err, course) {
+          return res.status(404).json({'message': 'Not found!'});
+      }
         if (err) {
-          return res.status(500).send(err);
+          return res.status(500).send(err); 
         }
-        if (course == null) {
-          return res.status(404).json({ message: "Course not found" });
-        }
-        return res.status(200).json(course);
+        
+        console.log(course.students);
+        return res.status(200).send(course.students);
       });
 });
 
-//task 3 ⛔️
+  //task 3 
+router.delete("/api/courses/:co_id/students/:student_id",function (req, res, next) {
+  Course.findByIdAndUpdate({_id: req.params.co_id})
+  .populate("students")
+  .exec(function (err, course, student){
+    if(err) {
+      return res.status(500).send(err);
+    }
+    if(course === null || student === null){
+      return res.status(404).json({message: "Not found!"});
+    }
+    course.students.pull({_id: req.params.student_id});
+    course.save();
+    return res.status(200).send(course.students);
+  });
+});
+
+//task 3 
 router.post("/api/courses/:id/students", function (req, res, next) {
     Course.findById(req.params.id, function (err, course) {
       if (err) {
@@ -274,6 +293,7 @@ router.get("/api/courses/:id/departments", function (req, res, next) {
   //task 4.a (sorts all the courses by descending names) ⛔️
 router.get('/api/courses?sort=-name', function(req, res, next) {
     Course.find(function(err, course) {
+      
         if (err) { return res.status(500).send(err); }
        return res.status(200).json(course);
     });

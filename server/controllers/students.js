@@ -68,9 +68,9 @@ router.put('/api/students/:id', function(req, res,next) {
 });
 
 router.delete('/api/students', function(req,res,next){
-    Student.delete(function(err, students) {
+    Student.deleteMany(function(err, students) {
         if (err) { return res.status(500).send(err);  }
-        return res.status(200).json(student);
+        res.status(200).json(students);
     });
 });
 
