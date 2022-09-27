@@ -37,9 +37,24 @@ app.use(morgan('dev'));
 app.options('*', cors());
 app.use(cors());
 
+app.set('view-engine', 'ejs');
+
 // Import routes
 app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT342 backend ExpressJS project!'});
+    res.render(index.ejs);
+});
+
+app.get('/login', function(req, res){
+    res.render('login.ejs');
+});
+
+app.get('/register', function(req, res){
+    res.render('register.ejs');
+});
+
+app.post('/register', function(req, res){
+    
 });
 
 app.use(staffsController);
