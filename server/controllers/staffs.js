@@ -1,16 +1,79 @@
 var express = require('express');
 var router = express.Router();
+const bcrypt = require("bcrypt");
 var Staff = require('../models/staff');
+const jwt= require("jsonwebtoken");
+const mongoose = require('mongoose');
 //const createUser = require( '../helpers/validation');
 //const decodeHeader = require( '../middleware/verifyAuth');
 
-router.post('/api/staffs', function(req, res, next){
-    var staff = new Staff(req.body);
-    staff.save(function(err, staff) {
-        if (err) { return res.status(500).send(err); }
-        console.log("New Staff ", staff.SNN, "created");
-        res.status(201).json(staff);
+
+router.post('/api/login', (req,res,next) =>{
+    Staff.findOne({emailAddress: req.body.emailAddress})
+    .exec() 
+    .then(staff =>{
+     if(staff.length <1){
+        return res.status(401 ).json({
+            message: 'Authentication failed'
+        });
+     }
+     bcrypt.compare(req.body.password, staff.password, (err, result)=>{
+     if(err){
+        return res.status(401).json({
+            message: 'Authentication failed'
+        });
+     }
+     if (result){
+        const token =jwt.sign({
+            emailAddress: staff.emailAddress,
+            _id: staff._id
+        },
+        process.env.JWT_KEY,
+       {
+            expiresIn: "1h"
+        });
+        return res.status(200).json({
+            message: 'Authentication succussful',
+             token: token
+          // send the staff
+        });
+    }
+    res.status(401).json({
+        message:'Authentication failed'
+    });
     })
+})
+    .catch(err =>{
+        console.log(err);
+        res.status(500)
+    })
+    
+});
+router.post('/api/staffs', function(req, res, next){
+   var password = req.body.password;
+    bcrypt.hash(password, 10, (err,hash) =>{
+        if(err){
+            return re.status(500);
+        }
+     else {
+      var staff = new Staff({
+        _id: new mongoose.Types.ObjectId,
+        SSN: req.body.SSN,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        educationalDegree: req.body.educationalDegree,
+        role: req.body.role,
+        salary: req.body.salary,
+        telephone: req.body.telephone,
+        emailAddress: req.body.emailAddress,
+        address: req.body.address,
+        password: hash,
+        paymentDate: req.body.paymentDate
+      });
+      staff.save();
+      res.status(201).json(staff);
+    }
+    });
 });
 
 router.get('/api/staffs', function(req, res, next) {
@@ -51,7 +114,7 @@ router.patch('/api/staffs/:id', function(req, res,next) {
         staff.emailAddress = (req.body.emailAddress || staff.emailAddress);
         staff.address = (req.body.address || staff.address);
         staff.save();
-        res.status(201).json(staff);
+        res.json(staff);
     });
 });
 
@@ -74,7 +137,7 @@ router.put('/api/staffs/:id', function(req, res,next) {
     staff.emailAddress= req.body.emailAddress;
     staff.address =req.body.address;
     staff.save();
-    res.status(201).json(staff);
+    res.json(staff);
     });
 });
 
@@ -97,4 +160,3 @@ router.delete('/api/staffs/:id', function(req, res, next) {
 
 
 module.exports = router;
-

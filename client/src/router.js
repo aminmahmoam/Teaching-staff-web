@@ -21,9 +21,24 @@ export default new Router({
       component: Calendar
     },
     {
-      path: '/courses/:id',
+      path: '/ColleaguesPage',
+      name: 'colleaguesPage',
+      component: ColleaguesPage
+    },
+    {
+      path: 'courses/:id',
       name: 'coursePage',
       component: CoursePage
+    },
+    {
+      path: '/ProfilePage',
+      name: 'profilePage',
+      component: ProfilePage
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: loginPage
     }
   ]
 })
