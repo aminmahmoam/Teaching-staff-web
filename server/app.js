@@ -1,13 +1,28 @@
+if (process.env.NODE_ENV !== 'production'){
+    require('dotenv').config();
+}
+
 var express = require('express');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
 var path = require('path');
 var cors = require('cors');
+var bcrypt = require('bcrypt');
+var passport = require('passport');
+var flash = require('express-flash');
+var session = require('express-session');
+var methodOverride = require('method-override');
 var history = require('connect-history-api-fallback');
 var staffsController = require('./controllers/staffs');
 var coursesController = require('./controllers/courses');
 var departmentsController = require('./controllers/departments');
 var studentsController = require('./controllers/students');
+
+var initPassport = require('./passport-config');
+initPassport(passport, 
+    email =>  users.find(user => user.email === email),
+    id => users.find(user => user.id === id)
+);
 
 //var methodOverride = require('method-override');
 
@@ -38,6 +53,19 @@ app.options('*', cors());
 app.use(cors());
 
 app.set('view-engine', 'ejs');
+app.use(express.urlencoded({extended: false}));
+app.use(flash());
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}))
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(methodOverride('_method'));
+
+// temporary
+const users = [];
 
 // Import routes
 app.get('/api', function(req, res) {
@@ -45,17 +73,66 @@ app.get('/api', function(req, res) {
     res.render(index.ejs);
 });
 
-app.get('/login', function(req, res){
+// Import login and register page layouts
+app.get('/login', checkLogout, function(req, res){
     res.render('login.ejs');
 });
 
-app.get('/register', function(req, res){
+app.get('/register', checkLogout, function(req, res){
     res.render('register.ejs');
 });
 
-app.post('/register', function(req, res){
-    
+app.get('/', checkLogin, function(req, res){
+    res.render('index.ejs', {name: req.user.name})
+})
+
+app.post('/login', checkLogout, passport.authenticate('local', {
+    successRedirect : "/",
+    failureRedirect : "/login",
+    failureFlash : true
+}))
+
+app.post('/register', checkLogout, async function(req, res){
+    try {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        users.push({
+            id : Date.now.toString(),
+            name: req.body.name,
+            email: req.body.email,
+            password: hashedPassword
+        })
+        res.redirect('/login')
+    } catch {
+        res.redirect('/register')
+    }
+    console.log(users)
 });
+
+function checkLogin(req, res, next) {
+    if (req.isAuthenticated()){
+        return next();
+    }
+    res.redirect('/login');
+}
+
+function checkLogout(req, res, next) {
+    if (req.isAuthenticated()){
+        res.redirect('/');
+    }
+    next();
+}
+
+// app.delete('/logout', function(req, res){
+//     req.logOut()
+//     res.redirect('/login')
+// })
+
+app.delete("/logout", (req, res) => {
+    req.logout(req.user, err => {
+      if(err) return next(err);
+      res.redirect("/login");
+    });
+  });
 
 app.use(staffsController);
 app.use(coursesController);
