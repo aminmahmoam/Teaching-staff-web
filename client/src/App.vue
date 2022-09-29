@@ -1,12 +1,20 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>
+    <Menu />
+    <div class="main">
+      <Header />
+      <router-view/>
     </div>
-    <!-- Render the content of the current page view -->
-    <router-view/>
   </div>
 </template>
+<script>
+import Menu from './components/Menu.vue'
+import Header from './components/Header.vue'
+
+export default ({
+  components: { Menu, Header }
+})
+</script>
 
 <style>
 #app {
@@ -15,5 +23,12 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+.main {
+  position: absolute;
+  width: calc(100% - 250px);
+  left: 250px;
+  min-height: 100vh;
+  background: white;
 }
 </style>

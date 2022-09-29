@@ -55,6 +55,18 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -68,7 +80,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": \"DIT222\",\n    \"name\": \"Data Structure\"\n}",
+					"raw": "{\n    \"id\": \"DIT666\",\n    \"name\": \"Embedded systems\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -134,6 +146,17 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -170,6 +193,17 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful Patch request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -191,14 +225,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/api/courses/{{course_id}}",
+					"raw": "{{host}}/api/courses/6322202b2d87d5a395655a33",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"courses",
-						"{{course_id}}"
+						"6322202b2d87d5a395655a33"
 					]
 				}
 			},
@@ -212,6 +246,17 @@
 					"script": {
 						"exec": [
 							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful Put request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -236,14 +281,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/api/courses/{{course_id}}",
+					"raw": "{{host}}/api/courses/6322202b2d87d5a395655a33",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"courses",
-						"{{course_id}}"
+						"6322202b2d87d5a395655a33"
 					]
 				}
 			},
@@ -260,6 +305,17 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -272,14 +328,14 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}/api/courses/{{course_id}}",
+					"raw": "{{host}}/api/courses/6322202b2d87d5a395655a33",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"courses",
-						"{{course_id}}"
+						"6322202b2d87d5a395655a33"
 					]
 				}
 			},
@@ -293,6 +349,17 @@
 					"script": {
 						"exec": [
 							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -332,6 +399,17 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -345,7 +423,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"SSN\" :\"40000000-000\",\n\"firstName\" : \"Emrik\",\n\"lastName\":\"Dunvald\",\n\"educationalDegree\": \"Master\",\n\"role\": \"teacher\",\n\"salary\": 10000.00,\n\"telephone\": 7654637218,\n\"emailAddress\": \"Emrik@student.gu.se\",\n\"address\": \"Oplagatan\",\n\"password\": \"0000\"\n}\n",
+					"raw": "{\n\"SSN\" :\"50000000-000\",\n\"firstName\" : \"Jesus\",\n\"lastName\":\"Dunvald\",\n\"educationalDegree\": \"phd\",\n\"role\": \"teacher\",\n\"salary\": 100000.00,\n\"telephone\": 7654637218,\n\"emailAddress\": \"john@student.gu.se\",\n\"address\": \"Oplagatan\",\n\"password\": \"3333\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -353,14 +431,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/api/courses/6321b2b70115aa8034c46b02/staffs",
+					"raw": "{{host}}/api/courses/6322202b2d87d5a395655a33/staffs",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"courses",
-						"6321b2b70115aa8034c46b02",
+						"6322202b2d87d5a395655a33",
 						"staffs"
 					]
 				}
@@ -453,6 +531,17 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -466,7 +555,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"SSN\": \"111111-1111\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Anderson\",\n    \"emailAddress\": \"john@gmail.com\"\n}",
+					"raw": "{\n    \"SSN\": \"666666-6666\",\n    \"firstName\": \"Peter\",\n    \"lastName\": \"Anderson\",\n    \"emailAddress\": \"pete123@gmail.com\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -474,14 +563,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/api/courses/6321b2b70115aa8034c46b02/students",
+					"raw": "{{host}}/api/courses/6322202b2d87d5a395655a33/students",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"courses",
-						"6321b2b70115aa8034c46b02",
+						"6322202b2d87d5a395655a33",
 						"students"
 					]
 				}
@@ -499,6 +588,17 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -512,7 +612,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": \"B1\",\n    \"campus\": \"Lindholmen\",\n    \"name\": \"Business\"\n}",
+					"raw": "{\n    \"id\": \"B123\",\n    \"campus\": \"Lindholmen\",\n    \"name\": \"Business\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -520,14 +620,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/api/courses/6321b2b70115aa8034c46b02/departments",
+					"raw": "{{host}}/api/courses/6326fa25ba1cf507f780e42d/departments",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"courses",
-						"6321b2b70115aa8034c46b02",
+						"6326fa25ba1cf507f780e42d",
 						"departments"
 					]
 				}
@@ -545,6 +645,17 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -557,14 +668,14 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}/api/courses/6321b2b70115aa8034c46b02/departments",
+					"raw": "{{host}}/api/courses/6326fa25ba1cf507f780e42d/departments",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"courses",
-						"6321b2b70115aa8034c46b02",
+						"6326fa25ba1cf507f780e42d",
 						"departments"
 					]
 				}
@@ -582,6 +693,17 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -595,7 +717,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": \"B2\",\n    \"campus\": \"Lindholmen\",\n    \"name\": \"Biomedicine\"\n}",
+					"raw": "{\n    \"id\": \"B1\",\n    \"campus\": \"Lindholmen\",\n    \"name\": \"Business\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -626,6 +748,17 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"protocolProfileBehavior": {
@@ -650,13 +783,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/api/departments",
+					"raw": "{{host}}/api/departments/",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
-						"departments"
+						"departments",
+						""
 					]
 				}
 			},
@@ -673,6 +807,17 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -685,14 +830,14 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}/api/departments/6321db0bc0105e85d83d25a9",
+					"raw": "{{host}}/api/departments/63234924957548c34c678255",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"departments",
-						"6321db0bc0105e85d83d25a9"
+						"63234924957548c34c678255"
 					]
 				}
 			},
@@ -706,6 +851,17 @@
 					"script": {
 						"exec": [
 							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful Patch request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -730,14 +886,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/api/departments/6321db0bc0105e85d83d25a9",
+					"raw": "{{host}}/api/departments/63234924957548c34c678255",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"departments",
-						"6321db0bc0105e85d83d25a9"
+						"63234924957548c34c678255"
 					]
 				}
 			},
@@ -751,6 +907,17 @@
 					"script": {
 						"exec": [
 							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful Put request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -775,14 +942,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/api/departments/6321db0bc0105e85d83d25a9",
+					"raw": "{{host}}/api/departments/63234924957548c34c678255",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"departments",
-						"6321db0bc0105e85d83d25a9"
+						"63234924957548c34c678255"
 					]
 				}
 			},
@@ -799,6 +966,17 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -811,14 +989,14 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}/api/departments/6321e46658539d88775f4719",
+					"raw": "{{host}}/api/departments/63234924957548c34c678255",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"departments",
-						"6321e46658539d88775f4719"
+						"63234924957548c34c678255"
 					]
 				}
 			},
@@ -832,6 +1010,17 @@
 					"script": {
 						"exec": [
 							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -870,6 +1059,17 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -881,6 +1081,15 @@
 						"type": "text"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"SSN\" :\"20000010-000\",\n\"firstName\" : \"Armita\",\n\"lastName\":\"mahmoudifard\",\n\"educationalDegree\": \"bachelor\",\n\"role\": \"TA\",\n\"salary\": 20500.00,\n\"telephone\": 764192264,\n\"emailAddress\": \"armita@icloud.com\",\n\"address\": \"mandolingatan\",\n\"password\": \"111111\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "{{host}}/api/staffs",
 					"host": [
@@ -902,6 +1111,17 @@
 					"script": {
 						"exec": [
 							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -940,6 +1160,17 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -952,14 +1183,14 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}/api/staffs/6321fbd44cc3ee9edad7e078",
+					"raw": "{{host}}/api/staffs/63270ff347423e0aef854a20",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"staffs",
-						"6321fbd44cc3ee9edad7e078"
+						"63270ff347423e0aef854a20"
 					]
 				}
 			},
@@ -973,6 +1204,17 @@
 					"script": {
 						"exec": [
 							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful Patch request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -997,14 +1239,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/api/staffs/6321fbd44cc3ee9edad7e078",
+					"raw": "{{host}}/api/staffs/63270ff347423e0aef854a20",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"staffs",
-						"6321fbd44cc3ee9edad7e078"
+						"63270ff347423e0aef854a20"
 					]
 				}
 			},
@@ -1018,6 +1260,17 @@
 					"script": {
 						"exec": [
 							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful Put request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -1066,6 +1319,17 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -1078,14 +1342,14 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}/api/staffs/6321fbd44cc3ee9edad7e078",
+					"raw": "{{host}}/api/staffs/63270ff347423e0aef854a20",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"staffs",
-						"6321fbd44cc3ee9edad7e078"
+						"63270ff347423e0aef854a20"
 					]
 				}
 			},
@@ -1099,6 +1363,17 @@
 					"script": {
 						"exec": [
 							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -1134,6 +1409,17 @@
 					"script": {
 						"exec": [
 							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -1181,6 +1467,17 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -1216,6 +1513,17 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -1228,14 +1536,14 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}/api/students/6321c515c1eb5483be2620d5",
+					"raw": "{{host}}/api/students/6322206c2d87d5a395655a37",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"students",
-						"6321c515c1eb5483be2620d5"
+						"6322206c2d87d5a395655a37"
 					]
 				}
 			},
@@ -1249,6 +1557,17 @@
 					"script": {
 						"exec": [
 							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful Patch request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -1273,14 +1592,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/api/students/6321c515c1eb5483be2620d5",
+					"raw": "{{host}}/api/students/6322206c2d87d5a395655a37",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"students",
-						"6321c515c1eb5483be2620d5"
+						"6322206c2d87d5a395655a37"
 					]
 				}
 			},
@@ -1294,6 +1613,17 @@
 					"script": {
 						"exec": [
 							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful Put request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -1318,14 +1648,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/api/students/6321c515c1eb5483be2620d5",
+					"raw": "{{host}}/api/students/6322206c2d87d5a395655a37",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"students",
-						"6321c515c1eb5483be2620d5"
+						"6322206c2d87d5a395655a37"
 					]
 				}
 			},
@@ -1378,6 +1708,17 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -1410,6 +1751,17 @@
 					"script": {
 						"exec": [
 							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -1451,6 +1803,17 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -1486,6 +1849,17 @@
 					"script": {
 						"exec": [
 							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -1526,6 +1900,17 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -1538,7 +1923,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}/api/courses/6322202b2d87d5a395655a33/staffs/632220a62d87d5a395655a3d",
+					"raw": "{{host}}/api/courses/6322202b2d87d5a395655a33/staffs/63230d62263dcbb8662a2198",
 					"host": [
 						"{{host}}"
 					],
@@ -1547,7 +1932,7 @@
 						"courses",
 						"6322202b2d87d5a395655a33",
 						"staffs",
-						"632220a62d87d5a395655a3d"
+						"63230d62263dcbb8662a2198"
 					]
 				}
 			},
@@ -1561,6 +1946,17 @@
 					"script": {
 						"exec": [
 							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
 						],
 						"type": "text/javascript"
 					}

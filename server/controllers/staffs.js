@@ -51,7 +51,7 @@ router.patch('/api/staffs/:id', function(req, res,next) {
         staff.emailAddress = (req.body.emailAddress || staff.emailAddress);
         staff.address = (req.body.address || staff.address);
         staff.save();
-        res.json(staff);
+        res.status(201).json(staff);
     });
 });
 
@@ -74,7 +74,7 @@ router.put('/api/staffs/:id', function(req, res,next) {
     staff.emailAddress= req.body.emailAddress;
     staff.address =req.body.address;
     staff.save();
-    res.json(staff);
+    res.status(201).json(staff);
     });
 });
 

@@ -6,8 +6,21 @@
   "scripts": {
     "postinstall": "npm install --prefix server && npm install --prefix client && npm install --only=dev --prefix client && npm run build --prefix client"
   },
-  "engines" : {
-    "npm" : "6.x",
+  "engines": {
+    "npm": "6.x",
     "node": "14.x"
+  },
+  "devDependencies": {
+    "sass": "^1.55.0"
+  },
+  "dependencies": {
+    "@fullcalendar/core": "^5.11.3",
+    "@fullcalendar/daygrid": "^5.11.3",
+    "@fullcalendar/interaction": "^5.11.3",
+    "@fullcalendar/list": "^5.11.3",
+    "@fullcalendar/timegrid": "^5.11.3",
+    "@fullcalendar/vue": "^5.11.2",
+    "@vue/composition-api": "^1.7.1",
+    "bootstrap": "^5.2.1"
   }
 }
