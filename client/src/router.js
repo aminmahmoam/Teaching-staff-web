@@ -2,10 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Calendar from './views/Calendar.vue'
+import CoursePage from './views/CoursePage.vue'
 import ColleaguesPage from './views/ColleaguesPage.vue'
 import ProfilePage from './views/ProfilePage.vue'
 import loginPage from './views/login.vue'
-import CoursePage from './views/CoursePage.vue'
 
 Vue.use(Router)
 
@@ -29,6 +29,11 @@ export default new Router({
       component: ColleaguesPage
     },
     {
+      path: 'courses/:id',
+      name: 'coursePage',
+      component: CoursePage
+    },
+    {
       path: '/ProfilePage',
       name: 'profilePage',
       component: ProfilePage
@@ -37,11 +42,6 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: loginPage
-    },
-    {
-      path: '/courses/:id',
-      name: 'coursePage',
-      component: CoursePage
     }
   ]
 })

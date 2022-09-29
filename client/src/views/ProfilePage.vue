@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     getStaffInfo() {
-      Api.get('/staffs/63358fe9b71fe720c2aa2df0')
+      Api.get('/staffs/6332b952d273ec4c3842c51d')
         .then(response => {
           this.staffFirstName = response.data.firstName
           this.staffLastName = response.data.lastName
