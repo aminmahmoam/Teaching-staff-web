@@ -9,7 +9,7 @@
       <span class="material-icons">dashboard</span>
       <span class="text">Dashboard</span>
       </router-link>
-      <router-link class="button" to="/">
+      <router-link class="button" to="/ColleaguesPage/">
       <span class="material-icons">groups</span>
       <span class="text">Colleagues</span>
       </router-link>
@@ -17,7 +17,7 @@
       <span class="material-icons">calendar_month</span>
       <span class="text">Calendar</span>
       </router-link>
-      <router-link class="button" to="/">
+      <router-link class="button" to="/ProfilePage">
       <span class="material-icons">person</span>
       <span class="text">Profile</span>
       </router-link>
@@ -101,3 +101,4 @@ h3{
 margin-bottom: 3rem;
 }
 </style>
+

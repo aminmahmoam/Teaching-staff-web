@@ -3,6 +3,9 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Calendar from './views/Calendar.vue'
 import CoursePage from './views/CoursePage.vue'
+import ColleaguesPage from './views/ColleaguesPage.vue'
+import ProfilePage from './views/ProfilePage.vue'
+import loginPage from './views/login.vue'
 
 Vue.use(Router)
 
