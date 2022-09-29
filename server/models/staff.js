@@ -9,14 +9,15 @@ var staffSchema = new Schema({
     role: { type: String },
     salary: { type: Number },
     telephone: { type: Number },
-    emailAddress: { type: String ,
-        required: true,
-        unique: true,},
+    emailAddress: { type: String },
     address: { type: String },
     password: {
         type: String,
-        required: true,
+        required: true
       },
+      paymentDate: {
+        type: Number
+      }
 });
 
 

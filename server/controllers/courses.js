@@ -52,6 +52,8 @@ router.patch('/api/courses/:id', function(req, res,next) {
         course.department = (req.body.department || course.department);
         course.staffs = (req.body.staffs || course.staffs);
         course.students = (req.body.students || course.students);
+        course.lectureDates = (req.body.lectureDates || course.lectureDates)
+        course.text = (req.body.text || course.text)
         course.save();
         return res.status(201).json(course);
     });
@@ -191,7 +193,7 @@ router.get('/api/courses/:id/students', function(req, res, next){
             return res.status(404).json({'message': 'Course not found'});
         }
        console.log(course.students);
-       return res.status(200).send(course.students);
+       res.status(200).json({students: course.students});
     });
 });
 
@@ -293,9 +295,13 @@ router.get("/api/courses/:id/departments", function (req, res, next) {
   //task 4.a (sorts all the courses by descending names) ⛔️
 router.get('/api/courses?sort=-name', function(req, res, next) {
     Course.find(function(err, course) {
-      
-        if (err) { return res.status(500).send(err); }
-       return res.status(200).json(course);
+      var query = req.query;
+      if(!query.sort){
+        query.sort = '';
+      }
+      return res.status(200).send(course).sort(query.sort).exec();
+        //if (err) { return res.status(500).send(err); }
+       //return res.status(200).json(course);
     });
 });
   //task 4.a (field selection) ⛔️

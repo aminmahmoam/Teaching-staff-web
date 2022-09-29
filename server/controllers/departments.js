@@ -96,39 +96,4 @@ router.get("/api/departments?name=:name", function (req, res, next) {
     });
 });
 
-router.get("/api/departments", async function(req, res, err) {
-    //let limit = 5;
-    let offset = 0;
-    Department
-      .findAndCountAll()
-      .then(department => {
-        console.log("hello world", req.body);
-        //let page = (req.body.page && req.body.page) || 1;
-        let sortfield = req.body.sortfield;
-        let sortOrder = req.body.sortOrder;
-        //let pages = Math.ceil(data.count / limit);
-        //offset = limit * (page - 1);
-        Department
-          .findAll({
-            attributes: ["campus", "name"],
-            //limit: limit,
-            //offset: offset
-            order: [[sortfield || 'id', sortOrder || 'DESC']] // fixed at here
-          })
-          .then(deoartment => {
-            res.status(200).json({
-              
-              message: "Data has been retrieved",
-              result: users,
-            });
-          });
-      })
-      .catch(err => {
-        res.status(500).json({
-          status: 0,
-          message: "Data is not retrieved from database"
-        });
-      });
-  });
-
 module.exports = router;
