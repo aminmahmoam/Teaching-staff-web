@@ -5,6 +5,7 @@ var Staff = require('../models/staff');
 var Student = require('../models/student');
 var Department = require('../models/department');
 const staff = require('../models/staff');
+const checkAuth = require('../middleware/check-auth')
 
 
 
@@ -18,7 +19,7 @@ router.post('/api/courses', function(req, res, next){
 });
 
 
-router.get('/api/courses', function(req, res, next) {
+router.get('/api/courses',checkAuth, function(req, res, next) {
   Course.find(function(err, courses) {
       if (err) { return res.status(500).send(err); }
       res.json({courses: courses });

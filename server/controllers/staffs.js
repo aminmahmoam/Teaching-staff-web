@@ -4,6 +4,8 @@ const bcrypt = require("bcrypt");
 var Staff = require('../models/staff');
 const jwt= require("jsonwebtoken");
 const mongoose = require('mongoose');
+const checkAuth = require('../middleware/check-auth')
+const cookies = require("cookie-parser")
 //const createUser = require( '../helpers/validation');
 //const decodeHeader = require( '../middleware/verifyAuth');
 
@@ -32,10 +34,13 @@ router.post('/api/login', (req,res,next) =>{
        {
             expiresIn: "1h"
         });
+        //res.cookie("accessToken", token, {
+          //  maxAge: 3600000,
+        //})
+        res.cookie("access-token", token)
         return res.status(200).json({
             message: 'Authentication succussful',
-             token: token
-          // send the staff
+            token: token
         });
     }
     res.status(401).json({
