@@ -1,6 +1,9 @@
 <template>
   <div>
     <p>Courses</p>
+    <button @click="deleteAll">
+      Delete all students
+    </button>
      <div v-for="student in students" v-bind:key="student._id">
         <student-item v-bind:student="student"/>
      </div>
@@ -27,6 +30,20 @@ export default {
     getAllStudents() {
       Api.get(`/courses/${this.$route.params.id}/students`)
         .then(response => {
+          this.students = response.data.students
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    deleteAll() {
+      Api.delete(`/courses/${this.$route.params.id}/students`, {
+        headers: {
+          loginToken: localStorage.loginToken
+        }
+      })
+        .then(response => {
+          alert('The student was added successfully.')
           this.students = response.data.students
         })
         .catch(error => {

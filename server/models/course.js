@@ -14,10 +14,6 @@ var courseSchema = new Schema({
     students: [{
         type: Schema.Types.ObjectId,
         ref: "student"
-     }],
-     staffs: [{
-        type: Schema.Types.ObjectId,
-        ref: "staff"
      }]
 });
 

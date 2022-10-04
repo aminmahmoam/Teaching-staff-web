@@ -12,6 +12,7 @@ export default {
   name: 'ProfilePage',
   props: ['ProfilePage'],
   mounted() {
+    this.parseJwt(this.token)
     this.getStaffInfo()
   },
   data() {
@@ -19,12 +20,22 @@ export default {
       staffFirstName: '',
       staffLastName: '',
       staffAddress: '',
-      staffTelephone: ''
+      staffTelephone: '',
+      user: JSON,
+      token: localStorage.loginToken
     }
   },
   methods: {
+    parseJwt(token) {
+      const base64Url = token.split('.')[1]
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+      const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+      }).join(''))
+      this.user = JSON.parse(jsonPayload)
+    },
     getStaffInfo() {
-      Api.get('/staffs/63358fe9b71fe720c2aa2df0')
+      Api.get(`/staffs/${this.user._id}`)
         .then(response => {
           this.staffFirstName = response.data.firstName
           this.staffLastName = response.data.lastName

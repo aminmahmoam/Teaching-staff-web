@@ -21,11 +21,6 @@
       <span class="material-icons">person</span>
       <span class="text">Profile</span>
       </router-link>
-      <router-link class="button2" to="/">
-        <span class="material-icons">logout</span>
-        <span class="text">Logout</span>
-      </router-link>
-
     </div>
   </aside>
 </template>

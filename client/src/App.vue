@@ -1,6 +1,6 @@
 <template>
-  <div v-if="!authenticated">
-    <form>
+  <div v-if=!authenticated>
+    <form name='myForm' autocomplete="off">
     <label>emailAddress</label>
         <input type="email" required v-model="email">
    </form>
@@ -11,10 +11,11 @@
    <button @click="loginStaff">Login</button>
 
 </div>
-  <div id="app" v-else-if="authenticated">
+  <div id="app" v-else-if=authenticated>
     <Menu />
     <div class="main">
       <Header />
+      <button @click="logout">logout</button>
       <router-view/>
     </div>
   </div>
@@ -26,14 +27,30 @@ import Header from './components/Header.vue'
 
 export default {
   components: { Menu, Header },
+  mounted() {
+    console.log(localStorage.getItem('loginToken'))
+    this.checkAuthentication()
+  },
   data() {
     return {
-      authenticated: false,
+      authenticated: Boolean,
       email: '',
       pass: ''
     }
   },
   methods: {
+    logout() {
+      localStorage.removeItem('loginToken')
+      this.authenticated = !this.authenticated
+      window.location.reload()
+    },
+    checkAuthentication() {
+      if (localStorage.getItem('loginToken') === null) {
+        this.authenticated = false
+      } else {
+        this.authenticated = true
+      }
+    },
     loginStaff() {
       Api.post('/login',
         {
@@ -42,6 +59,8 @@ export default {
         })
         .then(response => {
           if (response.status === 200) {
+            localStorage.loginToken = response.data.token
+            console.log(localStorage.loginToken)
             this.authenticated = true
           } else {
             this.authenticated = false
@@ -50,7 +69,6 @@ export default {
         )
     }
   }
-
 }
 </script>
 

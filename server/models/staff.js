@@ -15,9 +15,13 @@ var staffSchema = new Schema({
         type: String,
         required: true
       },
-      paymentDate: {
-        type: Number
-      }
+    paymentDate: {
+      type: Number
+    },
+    courses: [{
+      type: Schema.Types.ObjectId,
+      ref: "course"
+   }]
 });
 
 

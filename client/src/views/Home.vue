@@ -51,6 +51,7 @@ export default {
   props: ['home'],
   components: { CourseItem },
   mounted() {
+    this.parseJwt(this.token)
     this.getAllCourses()
     this.setNextLecture()
   },
@@ -59,13 +60,28 @@ export default {
       courses: [],
       lecturesDates: [],
       lectureDate: '',
-      lectureName: ''
-
+      lectureName: '',
+      token: localStorage.loginToken,
+      user: JSON
     }
   },
   methods: {
+    parseJwt(token) {
+      const base64Url = token.split('.')[1]
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+      const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+      }).join(''))
+      this.user = JSON.parse(jsonPayload)
+
+      console.log(this.user)
+    },
     getAllCourses() {
-      Api.get('/courses')
+      Api.get(`/staffs/${this.user._id}/courses`, {
+        headers: {
+          loginToken: localStorage.loginToken
+        }
+      })
         .then(response => {
           this.courses = response.data.courses
         })
@@ -74,7 +90,11 @@ export default {
         })
     },
     setNextLecture() {
-      Api.get('/courses')
+      Api.get(`/staffs/${this.user._id}/courses`, {
+        headers: {
+          loginToken: localStorage.loginToken
+        }
+      })
         .then(response => {
           const size = response.data.courses.length
           let smallest = response.data.courses[0].lectureDates[0]

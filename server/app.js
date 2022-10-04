@@ -8,7 +8,7 @@ var staffsController = require('./controllers/staffs');
 var coursesController = require('./controllers/courses');
 var departmentsController = require('./controllers/departments');
 var studentsController = require('./controllers/students');
-const cookies = require("cookie-parser")
+const cookieParser = require('cookie-parser');
 
 //var methodOverride = require('method-override');
 
@@ -37,12 +37,12 @@ app.use(morgan('dev'));
 // Enable cross-origin resource sharing for frontend must be registered before api
 app.options('*', cors());
 app.use(cors());
-app.use(cookies());
 // Import routes
 app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT342 backend ExpressJS project!'});
 });
 
+app.use(cookieParser());
 app.use(staffsController);
 app.use(coursesController);
 app.use(departmentsController);

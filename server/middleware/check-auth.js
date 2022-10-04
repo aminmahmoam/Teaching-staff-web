@@ -1,8 +1,11 @@
 const jwt= require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
-    const accessToken = req.cookies["access-token"];
-    if (!accessToken)
+    console.log('everything good');
+    const accessToken = req.headers['logintoken'];
+    console.log(accessToken);
+    console.log(req.headers);
+    if (accessToken === null)
     return res.status(401).json({ error: "User not authenticated!"});
     
     try {
