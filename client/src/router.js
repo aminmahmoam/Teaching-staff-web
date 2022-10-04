@@ -4,7 +4,6 @@ import Home from './views/Home.vue'
 import Calendar from './views/Calendar.vue'
 import ColleaguesPage from './views/ColleaguesPage.vue'
 import ProfilePage from './views/ProfilePage.vue'
-import Login from './views/Login.vue'
 import CoursePage from './views/CoursePage.vue'
 
 Vue.use(Router)
@@ -32,11 +31,6 @@ export default new Router({
       path: '/ProfilePage',
       name: 'profilePage',
       component: ProfilePage
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login
     },
     {
       path: '/courses/:id',

@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="profile">
     <h1> {{staffFirstName}} {{staffLastName}}</h1>
     <h2> {{staffTelephone}}</h2>
     <h3> {{staffAddress}}</h3>
@@ -49,3 +49,10 @@ export default {
   }
 }
 </script>
+<style scoped>
+.profile{
+ margin-left: 1rem;
+ margin-right: 1rem;
+ margin-top: 1rem;
+}
+</style>

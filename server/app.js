@@ -3,6 +3,8 @@ var mongoose = require('mongoose');
 var morgan = require('morgan');
 var path = require('path');
 var cors = require('cors');
+//var multer = require('multer');
+var fileupload = require("express-fileupload");
 var history = require('connect-history-api-fallback');
 var staffsController = require('./controllers/staffs');
 var coursesController = require('./controllers/courses');
@@ -27,9 +29,11 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, 
     console.log(`Connected to MongoDB with URI: ${mongoURI}`);
 });
 
+
 // Create Express app
 var app = express();
 // Parse requests of content-type 'application/json'
+app.use(fileupload());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // HTTP request logger
@@ -48,6 +52,11 @@ app.use(coursesController);
 app.use(departmentsController);
 app.use(studentsController);
 
+
+app.post('/upload', (req,res) => {
+    let myFiles = req.files.myFiles
+    res.send(`${myFiles}`)
+})
 
 // override with the X-HTTP-Method-Override header in the request
 //app.use(methodOverride('X-HTTP-Method-Override'));
