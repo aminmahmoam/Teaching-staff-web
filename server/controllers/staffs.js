@@ -6,7 +6,6 @@ var Course = require('../models/course');
 const jwt= require("jsonwebtoken");
 const mongoose = require('mongoose');
 const checkAuth = require('../middleware/check-auth')
-const cookies = require("cookie-parser");
 //const createUser = require( '../helpers/validation');
 //const decodeHeader = require( '../middleware/verifyAuth');
 
@@ -79,8 +78,42 @@ router.post('/api/staffs', function(req, res, next){
         password: hash,
         paymentDate: req.body.paymentDate
       });
-      staff.save();
-      res.status(201).json(staff);
+      staff.save()
+      .then(result => {
+        console.log(result);
+      res.status(201).json({
+        message:"Staff has been created",
+        staff: result,
+        links:[{
+          rel: "All staffs",
+          type: 'GET',
+          hrel: "http://localhost:3000/api/staffs/",
+        },{
+          rel: "self",
+          type: 'PATCH',
+          hrel:"http://localhost:3000/api/staffs/" + result._id,
+        },
+        {
+          rel: "self",
+          type: 'GET',
+          hrel:"http://localhost:3000/api/staffs/" + result._id,
+        },
+        {
+          rel: "self",
+          type: 'DELETE',
+          hrel:"http://localhost:3000/api/staffs/" + result._id,
+        },
+
+      ]
+      })
+
+      })
+      .catch(err => {
+       console.log(err);
+       res.status(500).json({
+        error: err
+       });
+      })
     }
     });
 });
@@ -88,9 +121,10 @@ router.post('/api/staffs', function(req, res, next){
 router.get('/api/staffs', function(req, res, next) {
     Staff.find(function(err, staffs) {
         if (err) { return res.status(500).send(err); }
-        res.json({'staffs': staffs });
+        res.json({'staffs': staffs});
         res.status(200);
-    });
+        })
+
 });
 
 router.get('/api/staffs/:id', function(req, res, next) {
@@ -202,7 +236,7 @@ router.get("/api/staffs/:st_id/courses/:co_id", function (req, res, next) {
   
   
   //task 3
-  router.get('/api/staffs/:id/courses', function(req, res, next){
+  router.get('/api/staffs/:id/courses', checkAuth, function(req, res, next){
       var id = req.params.id;
       Staff.findOne({_id: id}).populate('courses').exec(function(err, staff) {
           if(err){ return res.status(500).send(err);}

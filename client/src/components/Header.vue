@@ -37,4 +37,5 @@ export default {
     margin-top: 1rem;
     margin-left: 1rem;
 }
+
 </style>

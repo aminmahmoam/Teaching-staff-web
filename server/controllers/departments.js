@@ -1,4 +1,5 @@
 var express = require('express');
+const department = require('../models/department');
 var router = express.Router();
 var Department = require('../models/department');
 
@@ -82,17 +83,19 @@ router.delete('/api/departments/:id', function(req, res, next) {
 });
 
 // task 4.a (filters departments based on their names) ⛔️
-router.get("/api/departments?name=:name", function (req, res, next) {
+router.get("/api/departments", function (req, res, next) {
+    var selectedName =req.params.name;
     console.log("finding");
-    Department.find({ name: { $all: [req.params.name] } }).exec(function (
+   // Department.find({ name: { $gte: selectedName } }).exec(function (
+        Department.find({ name: selectedName}).exec(function (
       err,
-      department
+      departments
     ) {
       if (err) {
         return res.status(500).send(err);
       }
       console.log("success");
-      return res.status(200).json(department);
+      return res.status(200).json({departments : departments.findAll(d => d.name== selectedName)})
     });
 });
 

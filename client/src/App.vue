@@ -87,4 +87,12 @@ export default {
   min-height: 100vh;
   background: white;
 }
+
+@media(max-width: 768px) {
+  .main{
+    position: relative;
+    width: calc(100% - 70px);
+    left: 70px;
+  }
+}
 </style>

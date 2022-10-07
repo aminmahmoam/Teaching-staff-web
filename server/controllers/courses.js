@@ -6,7 +6,6 @@ var Student = require('../models/student');
 var Department = require('../models/department');
 const staff = require('../models/staff');
 const checkAuth = require('../middleware/check-auth');
-const cookieParser = require('cookie-parser');
 
 
 
@@ -224,15 +223,21 @@ router.get("/api/courses/:id/departments", function (req, res, next) {
   
 
   //task 4.a (sorts all the courses by descending names) ⛔️
-router.get('/api/courses?sort=-name', function(req, res, next) {
-    Course.find(function(err, course) {
-      var query = req.query;
-      if(!query.sort){
-        query.sort = '';
+router.get('/api/courses/:id/sortCourses',checkAuth,function(req, res, next) {
+  var sortedCourses =[];
+    Course.find(function(err, courses) {
+      if(err){
+        return res.status(500).send(err);
       }
-      return res.status(200).send(course).sort(query.sort).exec();
-        //if (err) { return res.status(500).send(err); }
-       //return res.status(200).json(course);
+      for (var i=0; i<courses.length; i++) {
+           sortedCourses.push([courses[i].name, courses[i]]);
+      }
+      sortedCourses.sort
+      (function(a,b){
+        return b[0]-a[0];
+      });
+      res.json( Object.assign({}, sortedCourses));
+      res.status(200);
     });
 });
   //task 4.a (field selection) ⛔️
