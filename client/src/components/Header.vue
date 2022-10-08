@@ -68,8 +68,12 @@ export default {
 .user {
     display: flex;
     margin-top: 1rem;
-    margin-left: 1rem;
     margin-left: 540px;
+}
+@media (max-width: 768px){
+  .user{
+    margin-left: 50px;
+  }
 }
 
 </style>

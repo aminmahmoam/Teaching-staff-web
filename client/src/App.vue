@@ -15,9 +15,7 @@
 
         <div class="separator"></div>
 
-        <p class="welcome-message">Please,
-          provide login credential to proceed
-          and have access to all our services</p>
+        <p class="welcome-message">Please enter email and password</p>
 
         <div name='myForm' class="login-form" autocomplete="off">
 
@@ -110,7 +108,7 @@ export default {
 </script>
 
 <style scoped>
-#app {
+ #app {
   font-family: 'Montserrat', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -202,6 +200,8 @@ section {
   margin: 24px;
 }
 .welcome-message {
+  display: flex;
+  flex-direction: row;
   text-align: center;
   font-size: 1.1em;
   line-height: 28px;
@@ -275,11 +275,148 @@ input ~ i {
     transition: opacity 0.4;
   }
 
-@media(max-width: 768px) {
+@media(max-width: 768px)
+ {
+  #app {
+  font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+#app-login {
+  font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #303433;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.background {
+  width: auto;
+  height: auto;
+  background-image: linear-gradient(to
+    left, #c3dede, white);
+  display: flex;
+  flex-direction: column;
+}
+.login-main {
+  position: relative;
+  height: calc(100% - 20px);
+  top: 10px;
+  left: 40px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+  text-align: center;
+  color: #303433;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 40%;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.section.side {
+  background-size: 60% 102%;
+}
+
+.side img {
+ margin-left: 0px;
+ height: 400px;
+ width: 320px;
+ max-width: 320px;
+ max-height: 400px;
+ image-orientation:from-image;
+}
+
+.login-container {
+  max-width: 20px;
+  padding: 2px;
+  padding-left: 190px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+}
+
+.title {
+  text-transform: uppercase;
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 1px;
+}
+.separator {
+  width: 10px;
+  height: 2px;
+  background-color: darkcyan;
+  margin: 6px;
+}
+.welcome-message {
+  display: none;
+}
+.login-form {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+.form-control {
+  width: 100%;
+  position: relative;
+  margin-bottom: 24px;
+}
+input,
+input {
+  width: 100%;
+  background-color: #e6e6e6;
+  color: #333;
+  letter-spacing: 0.5px;
+  padding: 3px 32px;
+}
+input ~ i {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  transition: color   0.4s;
+  }
+  input:focus ~ i {
+    color: darkcyan;
+  }
+  button.submit {
+    padding: 7px 20px;
+    margin: 5px auto;
+  }
+  button.submit:hover {
+    opacity: 0.9;
+  }
+  .logoL img {
+  width: 10%;
+  max-width: 10%;
+  padding-bottom: 5px;
+  margin-left: -57rem;
+  }
   .main{
     position: relative;
     width: calc(100% - 70px);
     left: 70px;
   }
-}
+  .logout{
+    margin-left: 180px;
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
+    size: 2px;
+  }
+  }
 </style>

@@ -1,6 +1,6 @@
 <template>
 <div class="home">
-  <p>Overview</p>
+  <p class="overview">Overview</p>
 <div class="cardbox">
   <li class="boxlist"><div class="card">
     <div>
@@ -197,30 +197,59 @@ p {
   font-weight: 3000;
   letter-spacing: 1px;
 }
-@media(max-width: 768){
-  .cardbox {
+
+@media (max-width: 768px){
+  p{
+  margin-left: 60px;
+  margin-top: 13px;
+  margin-bottom: 5px;
+  color: #2c3e50;
+  font-size: 1.25em;
+  font-weight: 3000;
+  letter-spacing: 1px;
+}
+.home {
+  background-color: white;
+  width: calc(78%);
+  left: 180px;
+}
+.cardbox {
   position: relative;
   width: 100%;
-  padding-left: 0px;
+  padding: 6px;
   display: grid;
   grid-template-columns: repeat(2,1fr);
-  grid-gap: 30px;
+  grid-gap: 20px;
 }
 .card {
   position: relative;
   background: white;
-  padding-left: 5px;
-  border-radius: 10px;
+  padding: 3px;
+  border-radius: 3px;
   display: flex;
+  justify-content: space-between;
   cursor: pointer;
   box-shadow: 0 7px 25px rgba(0,0,0, 0.08);
 }
+.cardname {
+  color: black;
+  font-size: 1.1em;
+  margin-top: 3px;
+}
 .boxlist {
-position: fixed;
-list-style: none;
-left: 0px;
-width:10px;
-}
-}
 
+  list-style: none;
+  justify-content: space-between;
+
+}
+.toDo {
+  list-style: none;
+  justify-content: space-between;
+}
+.list-of-courses-li {
+  display: inline-block;
+  margin: 25px;
+
+}
+}
 </style>

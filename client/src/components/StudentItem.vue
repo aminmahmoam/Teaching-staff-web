@@ -37,4 +37,16 @@ export default {
 h5 {
   padding: 5px;
 }
+@media (max-width: 768px){
+    .card{
+      height: 110px;
+      padding-right: 5px;
+      padding-left: 5px;
+      border-radius: 5px;
+    }
+    h5 {
+    font-size: 1em;
+  padding: 2px;
+}
+  }
 </style>

@@ -129,7 +129,7 @@ export default {
       margin-top: 0rem ;
       margin-right: 0rem;
     }
-    @media (max-width: 780px) {
+    @media (max-width: 768px) {
       .form-control{
       font-size: 10pt;
       display: flex;

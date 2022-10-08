@@ -93,4 +93,36 @@ export default {
   margin-left: 5rem;
 }
 
+@media(max-width:768px){
+  .profile{
+ margin-left: 1rem;
+ margin-right: 1rem;
+ margin-top: 1rem;
+ display: flex;
+ flex-direction: column;
+}
+.data {
+  margin-top: 50px;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.space {
+  width: 150px;
+  height: 1px;
+  background-color: darkcyan;
+  margin: 70px;
+}
+  .image{
+    margin-left:0rem;
+    margin-right:0rem;
+    margin-top: 0rem;
+    display: flex;
+    flex-direction: column;
+  }
+  h3{
+    font-size: 1em;
+  }
+}
 </style>

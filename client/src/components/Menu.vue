@@ -115,10 +115,10 @@ menu{
   padding: 0px;
   margin: 3rem;
 }
-logo{
+.logo img{
   padding: 0px;
   margin-left: 0rem;
-  size: 2rem;
+  max-width: 80px;
 }
 .material-icons{
   font-size: 2rem;

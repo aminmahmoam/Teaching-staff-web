@@ -98,5 +98,26 @@ button {
   button:hover {
     opacity: 0.9;
   }
+@media (max-width: 768px){
+  h2 {
+  font-size: 1em;
+  margin-top: 15px;
+}
+h4 {
+  font-size: 1em;
+  padding-top: 30px;
 
+}
+input {
+  border-radius: 20px;
+  font-size: 1em;
+  width: 15rem;
+
+}
+button {
+  width: 150px;
+  padding: 7px 25px;
+
+  }
+}
 </style>

@@ -55,4 +55,17 @@ margin-bottom: 1rem;
   flex-direction: column;
   color: #2c3e50;
 }
+@media (max-width: 768px){
+  .card {
+  display: inline;
+  position: relative;
+  width: 15rem;
+  background: white;
+  padding: 0px;
+  border-radius: 5px;
+  display: flex;
+  cursor: pointer;
+  box-shadow: 0 7px 25px rgba(0,0,0, 0.08);
+}
+}
 </style>

@@ -6,7 +6,8 @@
     </div>
     <div v-else-if="!textExist">
         <h2>{{courseName}}</h2>
-        <h4>The home page is empty at the moment. Fell free to provide the needed discription and information.</h4>
+        <h4>The home page is empty at the moment.</h4>
+        <h5>Fell free to provide the needed information.</h5>
         <textarea rows= "15" cols="125" type="text" name="input" placeholder="type here" required="required" v-model="givenText">
         </textarea>
         <div>
@@ -99,5 +100,44 @@ button {
   background-color:  darkcyan;
   text-decoration-color: black;
   padding: 5px;
+}
+@media(max-width: 768px){
+  h2 {
+  font-size: 1em;
+  margin-top: 15px;
+  text-align: left;
+}
+h4 {
+  font-size: .75em;
+  margin-top: 15px;
+  margin-left: 0px;
+  text-align: left;
+}
+h5{
+  font-size: .75em;
+  text-align: left;
+}
+.text-box {
+ border: solid 1px black;
+ min-width: 45px;
+ padding: 0px;
+ display: inline-block;
+ margin-left: 10px;
+ margin-right:4px;
+}
+.text-box:focus{
+  outline:0;
+}
+textarea {
+  margin-left: 24px;
+  margin-right: 4px;
+  margin-top: 8px;
+  width: 200px;
+  height: 300px;
+}
+input {
+  width: 25px;
+  height: 200px;
+}
 }
 </style>

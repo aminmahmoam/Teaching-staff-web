@@ -153,5 +153,53 @@ export default {
       height: 2rem;
       border: none;
     }
+    @media (max-width: 768px) {
+      .tt {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    height: 150px;
+    padding: 4px;
+    border-radius: 5px;
+    width: 17rem;
+    margin-left: 10px;
 
+  }
+      .form-control{
+      font-size: 10pt;
+      display: flex;
+      flex-direction: row;
+      width: 10rem;
+      height: 1rem;
+      margin-left: 0rem;
+      margin-bottom: 1rem;
+      margin-top: 1rem ;
+      margin-right: 0rem;
+      }
+      .btn{
+      padding: 1px;
+      display: flex;
+      flex-direction: row;
+      margin-left: 3px;
+      margin-right: 0rem;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      font-size:.5em;
+      height: 1rem;
+      text-align: center;
+      }
+      .btn2{
+      padding: 2px;
+      margin-left: 1rem;
+      margin-right: 0rem;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      font-size: 5pt;
+      height: 1rem;
+      text-align: center;
+      }
+      p{
+        font-size: 1em;
+      }
+    }
   </style>

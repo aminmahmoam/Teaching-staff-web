@@ -86,4 +86,13 @@ button {
     background-color:  darkcyan;
     text-decoration-color: black;
 }
+@media(max-width: 768px){
+  h2 {
+  font-size: 1rem;
+  margin-top: 5px;
+}
+button {
+    margin-top: 15px;
+}
+}
 </style>
