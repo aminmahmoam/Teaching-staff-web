@@ -1,10 +1,8 @@
 <template>
    <div>
     <div class="card">
-    <div>
+    <div class="result">
       <p>{{staff.firstName}} {{staff.lastName}}</p>
-      <div>
-      </div>
       <p>Email: {{staff.emailAddress}}</p>
       <p>Telephone: {{staff.telephone}}</p>
     </div>
@@ -30,13 +28,32 @@ export default {
 <style scoped>
   .card {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
-    height: 150px;
+    height: 100px;
     background: white;
     padding: 8px;
     border-radius: 10px;
     cursor: pointer;
     box-shadow: 0 7px 25px rgba(0,0,0, 0.08);
+  }
+  .result{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  @media (max-width: 768px){
+    .card{
+      height: 150px;
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+    .result{
+      padding: 2px;
+      margin-left: 2px;
+      display: block;
+      justify-content: space-between;
+
+    }
   }
   </style>
