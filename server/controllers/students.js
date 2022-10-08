@@ -3,10 +3,9 @@ const department = require('../models/department');
 const student = require('../models/student');
 var router = express.Router();
 var Student = require('../models/student');
+const checkAuth = require('../middleware/check-auth');
 
-
-
-router.post('/api/students', function(req, res, next){
+router.post('/api/students', checkAuth, function(req, res, next){
     var student = new Student(req.body);
     student.save(function(err, student) {
         if (err) { return res.status(500).send(err);  }
@@ -14,7 +13,7 @@ router.post('/api/students', function(req, res, next){
     })
 });
 
-router.get('/api/students', function(req, res, next) {
+router.get('/api/students', checkAuth, function(req, res, next) {
     Student.find(function(err, students) {
         if (err) { return res.status(500).send(err);  }
         res.json({'students': students});
@@ -22,7 +21,7 @@ router.get('/api/students', function(req, res, next) {
     });
 });
 
-router.get('/api/students/:id', function(req, res, next) {
+router.get('/api/students/:id', checkAuth, function(req, res, next) {
     var id = req.params.id;
     Student.findById(id, function(err, student) {
         if (err) { return res.status(500).send(err);  }
@@ -34,7 +33,7 @@ router.get('/api/students/:id', function(req, res, next) {
 });
 
 
-router.patch('/api/students/:id', function(req, res,next) {
+router.patch('/api/students/:id', checkAuth, function(req, res,next) {
     var id = req.params.id;
     Student.findById(id, function(err, student) {
         if (err) { return res.status(500).send(err); }
@@ -50,7 +49,7 @@ router.patch('/api/students/:id', function(req, res,next) {
     });
 });
 
-router.put('/api/students/:id', function(req, res,next) {
+router.put('/api/students/:id', checkAuth, function(req, res,next) {
     var id = req.params.id;
     Student.findById(id, function(err, student) {
         if (err) { return res.status(500).send(err); }
@@ -67,14 +66,14 @@ router.put('/api/students/:id', function(req, res,next) {
     });
 });
 
-router.delete('/api/students', function(req,res,next){
+router.delete('/api/students', checkAuth, function(req,res,next){
     Student.deleteMany(function(err, students) {
         if (err) { return res.status(500).send(err);  }
         res.status(200).json(students);
     });
 });
 
-router.delete('/api/students/:id', function(req, res, next) {
+router.delete('/api/students/:id', checkAuth, function(req, res, next) {
     var id = req.params.id;
     Student.findOneAndDelete({_id: id}, function(err, student) {
         if (err) { return res.status(500).send(err);  }

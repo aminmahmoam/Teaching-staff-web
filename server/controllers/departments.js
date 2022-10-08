@@ -1,10 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var Department = require('../models/department');
+const checkAuth = require('../middleware/check-auth');
 
-
-
-router.post('/api/departments', function(req, res, next){
+router.post('/api/departments', checkAuth, function(req, res, next){
     var department = new Department(req.body);
     department.save(function(err, department) {
         if (err) { return res.status(500).send(err); }
@@ -13,7 +12,7 @@ router.post('/api/departments', function(req, res, next){
     });
 });
 
-router.get('/api/departments', function(req, res, next) {
+router.get('/api/departments', checkAuth, function(req, res, next) {
     Department.find(function(err, departments) {
         if (err) { return res.status(500).send(err); }
         res.json({'departments': departments});
@@ -21,7 +20,7 @@ router.get('/api/departments', function(req, res, next) {
     });
 });
 
-router.get('/api/departments/:id', function(req, res, next) {
+router.get('/api/departments/:id', checkAuth, function(req, res, next) {
     var id = req.params.id;
     Department.findById(id, function(err, department) {
         if (err) { return res.status(500).send(err); }
@@ -33,7 +32,7 @@ router.get('/api/departments/:id', function(req, res, next) {
 });
 
 
-router.patch('/api/departments/:id', function(req, res,next) {
+router.patch('/api/departments/:id', checkAuth, function(req, res,next) {
     var id = req.params.id;
     Department.findById(id, function(err, department) {
         if (err) { return res.status(500).send(err); }
@@ -48,7 +47,7 @@ router.patch('/api/departments/:id', function(req, res,next) {
     });
 });
 
-router.put('/api/departments/:id', function(req, res, next) {
+router.put('/api/departments/:id', checkAuth, function(req, res, next) {
     var id = req.params.id;
     Department.findById(id, function(err, department) {
         if (err) { return res.status(500).send(err); }
@@ -63,14 +62,14 @@ router.put('/api/departments/:id', function(req, res, next) {
     });
 });
 
-router.delete('/api/departments', function(req,res,next){
+router.delete('/api/departments', checkAuth, function(req,res,next){
     Department.deleteMany(function(err, department) {
         if (err) { return res.status(500).send(err); }
        return  res.status(200).json(department);
     });
 });
 
-router.delete('/api/departments/:id', function(req, res, next) {
+router.delete('/api/departments/:id', checkAuth, function(req, res, next) {
     var id = req.params.id;
     Department.findOneAndDelete({_id: id}, function(err, department) {
         if (err) { res.status(500).send(err); }

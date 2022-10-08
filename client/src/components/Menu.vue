@@ -1,7 +1,7 @@
 <template>
   <aside>
     <div class= "logo">
-      <img src="../assets/icons8-triangles-50.png" alt="vue">
+      <img src="../assets/logo-no-background.png" alt="">
     </div>
     <h3></h3>
     <div class="menu">
@@ -39,11 +39,12 @@ aside {
   position: fixed;
   top: 0;
   bottom: 0;
-  width: 250px;
+  width: 210px;
   overflow: hidden;
   min-height: 100vh;
   padding: 1rem;
-  background-color: #284b63;
+  background-image: linear-gradient(to
+    bottom, #c3dede, rgb(11, 75, 80));
   color: #d9d9d9;
   transition: 0.2s ease-out;
 }
@@ -94,5 +95,9 @@ padding: 0.5rem 1.5rem;
 }
 h3{
 margin-bottom: 3rem;
+}
+.logo img {
+  width: 150px;
+  max-width: 150px;
 }
 </style>

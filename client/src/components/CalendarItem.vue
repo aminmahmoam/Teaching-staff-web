@@ -1,5 +1,5 @@
 <template>
-   <div>
+   <div class="calendar">
     <FullCalendar :options="calendarOptions"/>
    </div>
 </template>
@@ -36,3 +36,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.calendar {
+  padding: 1px;
+  padding-right: 0;
+  padding-top: 10px;
+  width: 100%;
+  height: 100%;
+}
+</style>

@@ -1,8 +1,21 @@
 <template>
 <div class="profile">
-    <h1> {{staffFirstName}} {{staffLastName}}</h1>
-    <h2> {{staffTelephone}}</h2>
+<div class="image">
+  <img src="../assets/profile.png" alt="">
+</div>
+<div class="data">
+    <p>Name</p>
+    <h3> {{staffFirstName}} {{staffLastName}}</h3>
+    <div class="space"></div>
+    <p>Telephone Number</p>
+    <h3> {{staffTelephone}}</h3>
+    <div class="space"></div>
+    <p>Email Address</p>
+    <h3> {{staffEmail}}</h3>
+    <div class="space"></div>
+    <p>Home Address</p>
     <h3> {{staffAddress}}</h3>
+</div>
 </div>
 </template>
 
@@ -20,6 +33,7 @@ export default {
       staffFirstName: '',
       staffLastName: '',
       staffAddress: '',
+      staffEmail: '',
       staffTelephone: '',
       user: JSON,
       token: localStorage.loginToken
@@ -35,12 +49,17 @@ export default {
       this.user = JSON.parse(jsonPayload)
     },
     getStaffInfo() {
-      Api.get(`/staffs/${this.user._id}`)
+      Api.get(`/staffs/${this.user._id}`, {
+        headers: {
+          loginToken: localStorage.loginToken
+        }
+      })
         .then(response => {
           this.staffFirstName = response.data.firstName
           this.staffLastName = response.data.lastName
           this.staffAddress = response.data.address
           this.staffTelephone = response.data.telephone
+          this.staffEmail = response.data.emailAddress
         })
         .catch(error => {
           console.log(error)
@@ -54,5 +73,24 @@ export default {
  margin-left: 1rem;
  margin-right: 1rem;
  margin-top: 1rem;
+ display: flex;
+ flex-direction: row;
 }
+.data {
+  margin-top: 100px;
+  margin-left: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.space {
+  width: 150px;
+  height: 4px;
+  background-color: darkcyan;
+  margin: 45px;
+}
+.image {
+  margin-left: 5rem;
+}
+
 </style>

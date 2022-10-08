@@ -4,7 +4,7 @@
     <div class="color">
       <span></span>
     </div>
-    <div>
+    <div class="details">
       <span class="courseName">{{course.name}}</span>
       <span class="courseCode">{{course.id}}</span>
     </div>
@@ -37,7 +37,10 @@ export default {
   margin-left: 0;
   height: 10rem;
   margin-right: 15px;
-  background-color: rgb(152, 211, 63);
+  background-image: linear-gradient(to
+    left, #dbfff9, white);
+
+  box-shadow: 0 7px 25px rgba(0,0,0, 0.08);
 }
 .button{
 display: flex;
@@ -46,5 +49,10 @@ min-width: none;
 text-decoration: none;
 padding: 0.5rem;
 margin-bottom: 1rem;
+}
+.details {
+  display: flex;
+  flex-direction: column;
+  color: #2c3e50;
 }
 </style>

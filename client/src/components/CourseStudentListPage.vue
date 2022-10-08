@@ -1,16 +1,17 @@
 <template>
   <div>
-    <p>Courses</p>
-    <button @click="deleteAll">
+    <div class="title">
+      <h2>Students</h2>
+    </div>
+    <div class="dd">
+    <input class="form-control" type="text" placeholder="Search a first name" v-model="search">
+    <button class="btn" @click="findStudent">Search</button>
+    <button @submit.prevent="goBack()" class="btn" @click="goBack">Back</button>
+    <button class="btn" @click="deleteAll">
       Delete all students
     </button>
-    <p>Students</p>
-    <div class="dd">
-    <input type="text" placeholder="Search a first name" v-model="search">
-    <button class="button-control" @click="findStudent">Search</button>
-    <button @submit.prevent="goBack()" class="bb" @click="goBack">Back</button>
     </div>
-    <div class="st" v-if="!searched">
+    <div class="tt" v-if="!searched">
      <div v-for="student in students" v-bind:key="student._id">
         <student-item v-bind:student="student"/>
      </div>
@@ -43,7 +44,11 @@ export default {
   },
   methods: {
     getAllStudents() {
-      Api.get(`/courses/${this.$route.params.id}/students`)
+      Api.get(`/courses/${this.$route.params.id}/students`, {
+        headers: {
+          loginToken: localStorage.loginToken
+        }
+      })
         .then(response => {
           this.students = response.data.students
         })
@@ -66,7 +71,11 @@ export default {
         })
     },
     findStudent() {
-      Api.get(`/courses/${this.$route.params.id}/students`)
+      Api.get(`/courses/${this.$route.params.id}/students`, {
+        headers: {
+          loginToken: localStorage.loginToken
+        }
+      })
         .then(response => {
           this.students = response.data.students
           const size = this.students.length
@@ -90,25 +99,21 @@ export default {
 <style scoped>
   .dd
   {
-  padding: 8px;
   display: flex;
   flex-direction: row;
-  font-size: large;
-  margin-right: 120rem;
-  margin-left: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
   }
   .tt {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-content: center;
     height: 150px;
     background: white;
     padding: 8px;
     border-radius: 10px;
     cursor: default;
-    box-shadow: 0 7px 25px rgba(0,0,0, 0.08);
+    width: 70rem;
+    margin-left: 50px;
+
   }
   .button-control{
     display: flex;
@@ -118,4 +123,35 @@ export default {
     margin-top: 0rem;
 
   }
+  .form-control {
+    font-size: 18pt;
+      display: flex;
+      flex-direction: row;
+      width: 40rem;
+      height: 2rem;
+      margin-left: 15rem;
+      margin-bottom: 1rem;
+      margin-top: 0rem ;
+      margin-right: 0rem;
+
+  }
+  .title {
+  margin-top: 15px;
+  margin-left: -1080px;
+  }
+  .btn{
+      background-color:  darkcyan;
+      text-decoration-color: black;
+      padding: 5px;
+      display: flex;
+      flex-direction: row;
+      margin-left: 1rem;
+      margin-right: 0rem;
+      margin-top: 0rem;
+      margin-bottom: 1rem;
+      font-size: 13pt;
+      height: 2rem;
+      border: none;
+    }
+
   </style>

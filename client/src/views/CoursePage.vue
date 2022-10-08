@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="tabs">
-            <TabNav :tabs="['Home', 'All Students', 'Add Student']" :selected="selected" @selected="setSelected">
+            <TabNav :tabs="['Home', 'All Students', 'Add Student', 'Files']" :selected="selected" @selected="setSelected">
                 <Tab :isSelected="selected === 'Home'">
                     <CourseHomePage />
                 </Tab>
@@ -10,6 +10,9 @@
                 </Tab>
                 <Tab :isSelected="selected === 'Add Student'">
                     <CourseAddStudentPage />
+                </Tab>
+                <Tab :isSelected="selected === 'Files'">
+                    <FilePage />
                 </Tab>
             </TabNav>
         </div>
@@ -22,11 +25,12 @@ import Tab from '../components/Tab.vue'
 import CourseHomePage from '../components/CourseHomePage.vue'
 import CourseStudentListPage from '../components/CourseStudentListPage.vue'
 import CourseAddStudentPage from '../components/CourseAddStudentPage.vue'
+import FilePage from '../components/FilePage.vue'
 
 export default {
   name: 'coursePage',
   props: ['coursePage'],
-  components: { TabNav, Tab, CourseHomePage, CourseStudentListPage, CourseAddStudentPage },
+  components: { TabNav, Tab, CourseHomePage, CourseStudentListPage, CourseAddStudentPage, FilePage },
   data() {
     return {
       selected: 'Home'

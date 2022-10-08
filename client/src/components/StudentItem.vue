@@ -1,10 +1,9 @@
 <template>
     <div class="card">
-    <div>
-      <p>{{student.firstName}}</p>
-      <p>{{student.lastName}}</p>
+    <div class="name">
+      <h5>{{student.firstName}} {{student.lastName}}</h5>
     </div>
-    <p>{{student.emailAddress}}</p>
+    <h5>Email: {{student.emailAddress}}</h5>
   </div>
 </template>
 
@@ -26,5 +25,16 @@ export default {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 0 7px 25px rgba(0,0,0, 0.08);
+
+}
+.name {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 8px;
+  margin-left: 5px;
+}
+h5 {
+  padding: 5px;
 }
 </style>

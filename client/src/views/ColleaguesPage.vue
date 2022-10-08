@@ -39,7 +39,11 @@ export default {
   },
   methods: {
     getAllStaffs() {
-      Api.get('/staffs')
+      Api.get('/staffs', {
+        headers: {
+          loginToken: localStorage.loginToken
+        }
+      })
         .then(response => {
           this.staffs = response.data.staffs
         })
@@ -48,7 +52,11 @@ export default {
         })
     },
     findStaff() {
-      Api.get('/staffs')
+      Api.get('/staffs', {
+        headers: {
+          loginToken: localStorage.loginToken
+        }
+      })
         .then(response => {
           this.staffs = response.data.staffs
           const size = this.staffs.length

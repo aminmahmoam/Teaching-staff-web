@@ -1,35 +1,23 @@
 <template>
   <div class="container">
     <div v-if="textExist">
-        <h1>{{courseName}}</h1>
+        <h2>{{courseName}}</h2>
         <p>{{courseText}}</p>
     </div>
     <div v-else-if="!textExist">
-        <h1>{{courseName}}</h1>
-        <h3>Hi, at the moment this course page is empty. Fell free to provide the needed discription and information.</h3>
-        <form>
-            <label>Page text</label>
-            <input type="text" required v-model="givenText">
-        </form>
-        <button @click="addTheText">send</button>
+        <h2>{{courseName}}</h2>
+        <h4>The home page is empty at the moment. Fell free to provide the needed discription and information.</h4>
+        <textarea rows= "15" cols="125" type="text" name="input" placeholder="type here" required="required" v-model="givenText">
+        </textarea>
+        <div>
+          <button @click="addTheText">Submit</button>
+        </div>
     </div>
-    <form @submit.prevent="submitFile()" enctype="multipart/form-data">
-      <div v-if="message" :class="`message ${error ? 'is-danger' : 'is-success'}`">
-        <div class="message-body">{{message}}</div>
-      </div>
-    <div class="large-12 medium-12 small-12 cell">
-      <label>File
-        <input type="file" name="myFiles" id="file" ref="file" v-on:change="handleFileUpload()"/>
-      </label>
-      <button v-on:click="submitFile()">Submit</button>
-    </div>
-    </form>
   </div>
 </template>
 
 <script>
 import { Api } from '@/Api'
-import axios from 'axios'
 
 export default {
   name: 'courseHomePage',
@@ -42,15 +30,16 @@ export default {
       courseName: '',
       courseText: '',
       textExist: Boolean,
-      givenText: '',
-      file: '',
-      message: '',
-      error: false
+      givenText: ''
     }
   },
   methods: {
     getTheText() {
-      Api.get(`/courses/${this.$route.params.id}`)
+      Api.get(`/courses/${this.$route.params.id}`, {
+        headers: {
+          loginToken: localStorage.loginToken
+        }
+      })
         .then(response => {
           this.courseName = response.data.name
           this.courseText = response.data.text
@@ -65,10 +54,10 @@ export default {
         })
     },
     addTheText() {
-      Api.patch(`/courses/${this.$route.params.id}`,
-        {
-          text: this.givenText
-        })
+      Api.patch(`/courses/${this.$route.params.id}`, {
+        text: this.givenText
+      }
+      )
         .then(response => {
           this.courseText = response.data.text
           window.location.reload()
@@ -76,46 +65,39 @@ export default {
         .catch(error => {
           console.log(error)
         })
-    },
-    async submitFile() {
-      const formData = new FormData()
-      formData.append('file', this.file)
-      /* axios.post('/single-file', formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        }
-      ).then(function () {
-        console.log('SUCCESS!!')
-      })
-        .catch(function () {
-          console.log('FAILURE!!')
-        })
-    }
-    */
-      try {
-        await axios.post('http://localhost:3000/upload', formData,
-          {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          })
-        console.log('success')
-        this.message = 'File has been uploaded'
-        this.file = ''
-        this.error = false
-      } catch (err) {
-        console.log(err)
-        this.message = 'Something went wrong'
-        this.error = true
-      }
-    },
-    handleFileUpload() {
-      this.file = this.$refs.file.files[0]
-      this.error = false
-      this.message = ''
     }
   }
 }
 </script>
+
+<style scoped>
+h2 {
+  margin-top: 15px;
+  text-align: left;
+}
+h4 {
+  margin-top: 15px;
+  margin-left: -70px;
+}
+input {
+  width: 1000px;
+  height: 500px;
+}
+.text-box {
+ border: solid 1px black;
+ min-width:100px;
+ padding: 5px;
+ display: inline-block;
+}
+.text-box:focus{
+  outline:0;
+}
+textarea {
+  margin-top: 25px;
+}
+button {
+  background-color:  darkcyan;
+  text-decoration-color: black;
+  padding: 5px;
+}
+</style>

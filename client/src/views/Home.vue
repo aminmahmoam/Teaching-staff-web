@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="home">
   <p>Overview</p>
 <div class="cardbox">
   <li class="boxlist"><div class="card">
@@ -8,20 +8,18 @@
       <div class="contentTime">{{lectureDate}}</div>
       <div class="content">{{lectureName}}</div>
     </div>
-    <div class="material-icons">school</div>
   </div>
 
   <div class="card">
     <div>
       <div class="cardname">Next Payment</div>
-      <div class="paymentDay">In <span class="thePDay">5</span> days</div>
+      <div class="paymentDay">In <span class="thePDay">{{payDay}}</span> days</div>
     </div>
-    <div class="material-icons">payments</div>
   </div>
   </li>
   <div class="card">
     <div>
-      <div class="cardname">To-do list</div>
+      <div class="cardname">To-do List</div>
       <li class="toDo">
         <div>1</div>
         <div>2</div>
@@ -29,16 +27,18 @@
         <div>4</div>
       </li>
     </div>
-    <div class="material-icons">checklist</div>
   </div>
 
 </div>
 <p>Courses</p>
-<div v-for="course in courses" v-bind:key="course._id">
-  <router-link :to="`/courses/${course._id}`">
-  <course-item v-bind:course="course"/>
-  </router-link>
-</div>
+<ul class="list-of-courses-ul">
+<li class="list-of-courses-li" v-for="course in courses" v-bind:key="course._id">
+
+    <router-link :to="`/courses/${course._id}`">
+    <course-item v-bind:course="course"/>
+    </router-link>
+</li>
+</ul>
 </div>
 </template>
 
@@ -54,13 +54,16 @@ export default {
     this.parseJwt(this.token)
     this.getAllCourses()
     this.setNextLecture()
+    this.setNextPayment()
   },
   data() {
     return {
       courses: [],
       lecturesDates: [],
+      paymentDates: [],
       lectureDate: '',
       lectureName: '',
+      payDay: '',
       token: localStorage.loginToken,
       user: JSON
     }
@@ -83,9 +86,11 @@ export default {
         }
       })
         .then(response => {
+          console.log(response.status)
           this.courses = response.data.courses
         })
         .catch(error => {
+          localStorage.removeItem('loginToken')
           console.log(error)
         })
     },
@@ -115,12 +120,38 @@ export default {
         .catch(error => {
           console.log(error)
         })
+    },
+    setNextPayment() {
+      Api.get(`/staffs/${this.user._id}`, {
+        headers: {
+          loginToken: localStorage.loginToken
+        }
+      })
+        .then(response => {
+          const size = response.data.paymentDates.length
+          let smallest = response.data.paymentDates[0]
+          for (let i = 0; i < size; i++) {
+            this.paymentDates.push(response.data.paymentDates[0])
+            if (response.data.paymentDates[0] <= smallest) {
+              smallest = response.data.paymentDates[0]
+            }
+          }
+          this.payDay = new Date(smallest * 1000)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }
 </script>
 
 <style scoped>
+.home {
+  background-color: white;
+  width: calc(100%);
+  left: 210px;
+}
 .cardbox {
   position: relative;
   width: 100%;
@@ -133,7 +164,7 @@ export default {
   position: relative;
   background: white;
   padding: 8px;
-  border-radius: 20px;
+  border-radius: 10px;
   display: flex;
   justify-content: space-between;
   cursor: pointer;
@@ -153,6 +184,18 @@ export default {
 .toDo {
   list-style: none;
   justify-content: space-between;
+}
+.list-of-courses-li {
+  display: inline-block;
+  margin: 25px;
+
+}
+p {
+  margin-left: -1070px;
+  color: #2c3e50;
+  font-size: 1.5em;
+  font-weight: 3000;
+  letter-spacing: 1px;
 }
 
 </style>

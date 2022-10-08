@@ -4,13 +4,9 @@ var Course = require('../models/course');
 var Staff = require('../models/staff');
 var Student = require('../models/student');
 var Department = require('../models/department');
-const staff = require('../models/staff');
 const checkAuth = require('../middleware/check-auth');
-const cookieParser = require('cookie-parser');
 
-
-
-router.post('/api/courses', function(req, res, next){
+router.post('/api/courses', checkAuth, function(req, res, next){
   var course = new Course(req.body);
   course.save(function(err, course) {
       if (err) { return res.status(500).send(err); }
@@ -30,7 +26,7 @@ router.get('/api/courses', checkAuth, function(req, res, next) {
 });
  
 
-router.get("/api/courses/:id", function (req, res, next) {
+router.get("/api/courses/:id", checkAuth, function (req, res, next) {
   Course.findOne({ _id: req.params.id })
     .populate("students") //doesn't return the students, returns empty
     .populate("staffs")
@@ -62,7 +58,7 @@ router.patch('/api/courses/:id', function(req, res,next) {
     });
 });
 
-router.put('/api/courses/:id', function(req, res,next) {
+router.put('/api/courses/:id', checkAuth, function(req, res,next) {
     var id = req.params.id;
     Course.findById(id, function(err, course) {
         if (err) { return res.status(500).send(err); }
@@ -80,7 +76,7 @@ router.put('/api/courses/:id', function(req, res,next) {
 });
 
 
-router.delete('/api/courses', function(req,res,next){
+router.delete('/api/courses', checkAuth, function(req,res,next){
     Course.deleteMany(function(err, course) {
         if (err) { return res.status(500).send(err); }
         return res.status(200).json(course);
@@ -88,7 +84,7 @@ router.delete('/api/courses', function(req,res,next){
 });
 
 
-router.delete('/api/courses/:id', function(req, res, next) {
+router.delete('/api/courses/:id', checkAuth, function(req, res, next) {
     var id = req.params.id;
     Course.findOneAndDelete({_id: id}, function(err, course) {
         if (err) {res.status(500).send(err); }
@@ -100,7 +96,7 @@ router.delete('/api/courses/:id', function(req, res, next) {
 });
 
 //task 3 
-router.get('/api/courses/:id/students', function(req, res, next){
+router.get('/api/courses/:id/students', checkAuth, function(req, res, next){
     Course.findOne({_id: req.params.id})
     .populate('students').exec(function(err, course) {
         if(err){ return res.status(500).send(err);}
@@ -113,7 +109,7 @@ router.get('/api/courses/:id/students', function(req, res, next){
 });
 
 //task 3 
-router.get("/api/courses/:co_id/students/:st_id", function (req, res, next) {
+router.get("/api/courses/:co_id/students/:st_id", checkAuth, function (req, res, next) {
     Course.findOne({ _id: req.params.co_id })
       .populate({path: "students", 
         match: { _id: { $eq: req.params.st_id } },
@@ -132,7 +128,7 @@ router.get("/api/courses/:co_id/students/:st_id", function (req, res, next) {
 });
 
   //task 3 
-router.delete("/api/courses/:co_id/students/:student_id",function (req, res, next) {
+router.delete("/api/courses/:co_id/students/:student_id", checkAuth, function (req, res, next) {
   Course.findByIdAndUpdate({_id: req.params.co_id})
   .populate("students")
   .exec(function (err, course, student){
@@ -148,7 +144,7 @@ router.delete("/api/courses/:co_id/students/:student_id",function (req, res, nex
   });
 });
 
-router.delete("/api/courses/:id/students", function (req, res, next) {
+router.delete("/api/courses/:id/students", checkAuth, function (req, res, next) {
   Course.findByIdAndUpdate({_id: req.params.id})
   .populate("students")
   .exec(function (err, course){
@@ -188,7 +184,7 @@ router.post("/api/courses/:id/students", function (req, res, next) {
 });
 
 //task 3
-router.post("/api/courses/:id/departments", function (req, res, next) {
+router.post("/api/courses/:id/departments", checkAuth, function (req, res, next) {
     Course.findById(req.params.id, function (err, course) {
       if (err) {
         return res.status(500);
@@ -211,7 +207,7 @@ router.post("/api/courses/:id/departments", function (req, res, next) {
 });
 
   //task 3
-router.get("/api/courses/:id/departments", function (req, res, next) {
+router.get("/api/courses/:id/departments", checkAuth, function (req, res, next) {
     Course.findOne({_id: req.params.id}).populate('department').exec(function(err, course) {
         if(err){ return res.status(500).send(err);}
         if(course == null){
