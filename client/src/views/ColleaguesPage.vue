@@ -82,7 +82,7 @@ export default {
       box-shadow: 0 7px 25px rgba(0,0,0, 0.08);
     }
     .btn{
-      background-color: #4CAF50;
+      background-color:  darkcyan;
       text-decoration-color: black;
       padding: 5px;
       display: flex;
@@ -91,15 +91,13 @@ export default {
       margin-right: 0rem;
       margin-top: 0rem;
       margin-bottom: 1rem;
-      border-color: green;
-      border: green;
       font-size: 13pt;
       height: 2rem;
+      border: none;
     }
     .btn2{
-      background-color: #4CAF50;
+      background-color:  darkcyan;
       text-decoration-color: black;
-      text-align: center;
       padding: 5px;
       display: flex;
       flex-direction: row;
@@ -107,10 +105,9 @@ export default {
       margin-right: 0rem;
       margin-top: 0rem;
       margin-bottom: 1rem;
-      border-color: green;
-      border: #4CAF50;
-      font-size: 11pt;
+      font-size: 13pt;
       height: 2rem;
+      border: none;
     }
     .form-control{
       font-size: 18pt;
@@ -124,12 +121,6 @@ export default {
       margin-right: 0rem;
     }
     @media (max-width: 780px) {
-      .title{
-        text-align:left;
-        color: green;
-        font-size: 12pt;
-        margin-top: 1rem;
-      }
       .form-control{
       font-size: 10pt;
       display: flex;
@@ -142,8 +133,6 @@ export default {
       margin-right: 0rem;
       }
       .btn{
-      background-color: #4CAF50;
-      text-decoration-color: black;
       padding: 2px;
       display: flex;
       flex-direction: row;
@@ -151,8 +140,6 @@ export default {
       margin-right: 0rem;
       margin-top: 1rem;
       margin-bottom: 1rem;
-      border-color: green;
-      border: green;
       font-size: 5pt;
       height: 1rem;
       text-align: center;
@@ -163,8 +150,6 @@ export default {
       margin-right: 0rem;
       margin-top: 1rem;
       margin-bottom: 1rem;
-      border-color: green;
-      border: green;
       font-size: 5pt;
       height: 1rem;
       text-align: center;
