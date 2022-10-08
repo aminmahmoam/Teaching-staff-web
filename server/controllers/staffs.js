@@ -70,8 +70,42 @@ router.post('/api/staffs', checkAuth, function(req, res, next){
         password: hash,
         paymentDate: req.body.paymentDate
       });
-      staff.save();
-      res.status(201).json(staff);
+      staff.save()
+      .then(result => {
+        console.log(result);
+      res.status(201).json({
+        message:"Staff has been created",
+        staff: result,
+        links:[{
+          rel: "All staffs",
+          type: 'GET',
+          hrel: "http://localhost:3000/api/staffs/",
+        },{
+          rel: "self",
+          type: 'PATCH',
+          hrel:"http://localhost:3000/api/staffs/" + result._id,
+        },
+        {
+          rel: "self",
+          type: 'GET',
+          hrel:"http://localhost:3000/api/staffs/" + result._id,
+        },
+        {
+          rel: "self",
+          type: 'DELETE',
+          hrel:"http://localhost:3000/api/staffs/" + result._id,
+        },
+
+      ]
+      })
+
+      })
+      .catch(err => {
+       console.log(err);
+       res.status(500).json({
+        error: err
+       });
+      })
     }
     });
 });
@@ -79,9 +113,10 @@ router.post('/api/staffs', checkAuth, function(req, res, next){
 router.get('/api/staffs', checkAuth, function(req, res, next) {
     Staff.find(function(err, staffs) {
         if (err) { return res.status(500).send(err); }
-        res.json({'staffs': staffs });
+        res.json({'staffs': staffs});
         res.status(200);
-    });
+        })
+
 });
 
 router.get('/api/staffs/:id', checkAuth, function(req, res, next) {

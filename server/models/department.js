@@ -6,7 +6,7 @@ var departmentSchema = new Schema({
     campus: { type: String },
     name: {
         type: String,
-        allowedValues: ["Applied information technology", "Biomedicine", "Computer and software engineering", "Business"],
+       // allowedValues: ["Applied information technology", "Biomedicine", "Computer and software engineering", "Business"],
       }
 
 });

@@ -197,5 +197,30 @@ p {
   font-weight: 3000;
   letter-spacing: 1px;
 }
+@media(max-width: 768){
+  .cardbox {
+  position: relative;
+  width: 100%;
+  padding-left: 0px;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-gap: 30px;
+}
+.card {
+  position: relative;
+  background: white;
+  padding-left: 5px;
+  border-radius: 10px;
+  display: flex;
+  cursor: pointer;
+  box-shadow: 0 7px 25px rgba(0,0,0, 0.08);
+}
+.boxlist {
+position: fixed;
+list-style: none;
+left: 0px;
+width:10px;
+}
+}
 
 </style>

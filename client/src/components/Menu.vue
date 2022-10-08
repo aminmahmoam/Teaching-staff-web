@@ -50,13 +50,11 @@ aside {
 }
 menu{
   margin: 0 -1rem;
-
 }
 .button{
 display: flex;
 align-items: center;
 min-width: none;
-
 text-decoration: none;
 padding: 0.5rem;
 margin-bottom: 1rem;
@@ -99,5 +97,38 @@ margin-bottom: 3rem;
 .logo img {
   width: 150px;
   max-width: 150px;
+}
+@media (max-width: 768px){
+  aside {
+  padding: 5px 5px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: 70px;
+  min-height: 200vh;
+  background-color: #284b63;
+  color: #d9d9d9;
+  transition: 0.2s ease-out;
+}
+menu{
+  margin-top: 1rem;
+  padding: 0px;
+  margin: 3rem;
+}
+logo{
+  padding: 0px;
+  margin-left: 0rem;
+  size: 2rem;
+}
+.material-icons{
+  font-size: 2rem;
+  color: black;
+  margin-right: 1rem;
+}
+.text{
+  color: black;
+  visibility: collapse;
+}
+
 }
 </style>
