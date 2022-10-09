@@ -81,21 +81,22 @@ router.delete('/api/departments/:id', checkAuth, function(req, res, next) {
     });
 });
 
-// task 4.a (filters departments based on their names) ⛔️
-router.get("/api/departments", function (req, res, next) {
-    var selectedName =req.params.name;
-    console.log("finding");
+// task 4.a (filters departments based on their names) 
+router.get('/api/filter',(req,res,next)=>{
+ var selectedName =req.query.name;
+console.log("finding");
    // Department.find({ name: { $gte: selectedName } }).exec(function (
-        Department.find({ name: selectedName}).exec(function (
-      err,
-      departments
-    ) {
-      if (err) {
-        return res.status(500).send(err);
-      }
-      console.log("success");
-      return res.status(200).json({departments : departments.findAll(d => d.name== selectedName)})
-    });
+    Department.find({ name: selectedName}).exec(function (
+  err,
+  department
+) {
+  if (err) {
+    return res.status(500).send(err);
+  }
+  console.log("success");
+  res.json({'departments': department});
+});
+
 });
 
 module.exports = router;

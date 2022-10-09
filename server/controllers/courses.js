@@ -219,8 +219,8 @@ router.get("/api/courses/:id/departments", checkAuth, function (req, res, next) 
 });
   
 
-  //task 4.a (sorts all the courses by descending names) ⛔️
-router.get('/api/courses/:id/sortCourses',checkAuth,function(req, res, next) {
+  //task 4.a (sorts all the courses by descending names) 
+router.get('/api/sort',checkAuth,function(req, res, next) {
   var sortedCourses =[];
     Course.find(function(err, courses) {
       if(err){
@@ -229,16 +229,18 @@ router.get('/api/courses/:id/sortCourses',checkAuth,function(req, res, next) {
       for (var i=0; i<courses.length; i++) {
            sortedCourses.push([courses[i].name, courses[i]]);
       }
-      sortedCourses.sort
-      (function(a,b){
+      sortedCourses.sort();
+   /*   (function(a,b){
         return b[0]-a[0];
       });
-      res.json( Object.assign({}, sortedCourses));
+      */
+      res.json(sortedCourses);
       res.status(200);
     });
+
 });
   //task 4.a (field selection) ⛔️
-router.get('/api/courses?fields=name,id', function(req, res, next) {
+router.get('/api/selection', function(req, res, next) {
       Course.find(function(err, courses) {
           if (err) { return res.status(500).send(err);  }
           res.json({'courses': courses});
