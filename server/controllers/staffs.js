@@ -5,7 +5,8 @@ var Staff = require('../models/staff');
 var Course = require('../models/course');
 const jwt= require("jsonwebtoken");
 const mongoose = require('mongoose');
-const checkAuth = require('../middleware/check-auth')
+const checkAuth = require('../middleware/check-auth');
+const staff = require('../models/staff');
 
 router.post('/api/login', (req,res,next) =>{
     Staff.findOne({emailAddress: req.body.emailAddress})
@@ -113,10 +114,18 @@ router.post('/api/staffs', checkAuth, function(req, res, next){
 router.get('/api/staffs', checkAuth, function(req, res, next) {
     Staff.find(function(err, staffs) {
         if (err) { return res.status(500).send(err); }
-        res.json({'staffs': staffs});
-        res.status(200);
+          res.status(200).json({
+            staffs,
+            links:[
+              {
+                rel: "create",
+                type: 'POST',
+                hrel:"http://localhost:3000/api/staffs/"
+              }
+          ]
         })
 
+});
 });
 
 router.get('/api/staffs/:id', checkAuth, function(req, res, next) {
@@ -128,7 +137,29 @@ router.get('/api/staffs/:id', checkAuth, function(req, res, next) {
         if (staff === null) {
             return res.status(404).json({'message': 'Staff not found!'});
         }
-        return res.status(200).json(staff);
+        return res.status(200).json({
+         staff,
+         links:[{
+          rel: "All staffs",
+          type: 'GET',
+          hrel: "http://localhost:3000/api/staffs/",
+        },{
+          rel: "self",
+          type: 'PATCH',
+          hrel:"http://localhost:3000/api/staffs/" + staff._id,
+        },
+        { rel: "create",
+          type: 'POST',
+          hrel:"http://localhost:3000/api/staffs/",
+          },
+          {
+          rel: "self",
+          type: 'DELETE',
+          hrel:"http://localhost:3000/api/staffs/" + staff._id,
+        },
+
+      ]
+    });
     });
 });
 
@@ -148,8 +179,42 @@ router.patch('/api/staffs/:id', checkAuth, function(req, res,next) {
         staff.telephone =(req.body.telephone || staff.telephone);
         staff.emailAddress = (req.body.emailAddress || staff.emailAddress);
         staff.address = (req.body.address || staff.address);
-    staff.save();
-    res.json(staff);
+    staff.save()
+    .then(result => {
+      console.log(result);
+    res.status(201).json({
+      message:"Staff has been patched",
+      staff: result,
+      links:[{
+        rel: "All staffs",
+        type: 'GET',
+        hrel: "http://localhost:3000/api/staffs/",
+      },
+      { rel: "create",
+        type: 'POST',
+        hrel:"http://localhost:3000/api/staffs/",
+      },
+      {
+        rel: "self",
+        type: 'GET',
+        hrel:"http://localhost:3000/api/staffs/" + result._id,
+      },
+      {
+        rel: "self",
+        type: 'DELETE',
+        hrel:"http://localhost:3000/api/staffs/" + result._id,
+      },
+
+    ]
+    })
+
+    })
+    .catch(err => {
+     console.log(err);
+     res.status(500).json({
+      error: err
+     });
+    })
     });
 });
 
@@ -169,26 +234,94 @@ router.put('/api/staffs/:id', checkAuth, function(req, res,next) {
         staff.telephone = req.body.telephone;
         staff.emailAddress= req.body.emailAddress;
         staff.address =req.body.address;
-    staff.save();
-    res.json(staff);
+    staff.save()
+    .then(result => {
+      console.log(result);
+    res.status(201).json({
+      message:"Staff has been put",
+      staff: result,
+      links:[{
+        rel: "All staffs",
+        type: 'GET',
+        hrel: "http://localhost:3000/api/staffs/",
+      },
+      { rel: "create",
+        type: 'POST',
+        hrel:"http://localhost:3000/api/staffs/",
+      },
+      {
+        rel: "self",
+        type: 'GET',
+        hrel:"http://localhost:3000/api/staffs/" + result._id,
+      },
+      {
+        rel: "self",
+        type: 'DELETE',
+        hrel:"http://localhost:3000/api/staffs/" + result._id,
+      },
+
+    ]
+    })
+
+    })
+    .catch(err => {
+     console.log(err);
+     res.status(500).json({
+      error: err
+     });
+    })
     });
 });
 
 router.delete('/api/staffs', checkAuth, function(req,res,next){
     Staff.deleteMany(function(err, staffs) {
-        if (err) { return next(err); }
-        res.status(200).json(staffs);
+        if (err) {  return res.status(500).send(err); }
+        return res.status(200).json({
+          staffs,
+          links:[{
+           rel: "All staffs",
+           type: 'GET',
+           hrel: "http://localhost:3000/api/staffs/",
+         },
+         { rel: "create",
+           type: 'POST',
+           hrel:"http://localhost:3000/api/staffs/",
+           },
+       ]
+     });
     });
 });
 router.delete('/api/staffs/:id', checkAuth, function(req, res, next) {
     var id = req.params.id;
     Staff.findOneAndDelete({_id: id}, function(err, staff) {
-        if (err) { return next(err); }
+        if (err) { return res.status(500).send(err); }
         if (staff === null) {
             return res.status(404).json({'message': 'Staff not found'});
         }
-        res.json(staff);
-    });
+        return res.status(200).json({
+          staff,
+          links:[{
+           rel: "All staffs",
+           type: 'GET',
+           hrel: "http://localhost:3000/api/staffs/",
+         },
+         { rel: "create",
+           type: 'POST',
+           hrel:"http://localhost:3000/api/staffs/",
+           },
+           {
+            rel: "self",
+            type: 'PATCH',
+            hrel:"http://localhost:3000/api/staffs/" + staff._id,
+          },
+          {
+          rel: "self",
+          type: 'DELETE',
+          hrel:"http://localhost:3000/api/staffs/" + staff._id,
+        },
+       ]
+     });
+});
 });
 
 //task 3 

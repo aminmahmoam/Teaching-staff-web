@@ -6,18 +6,58 @@ const checkAuth = require('../middleware/check-auth');
 
 router.post('/api/departments', checkAuth, function(req, res, next){
     var department = new Department(req.body);
-    department.save(function(err, department) {
-        if (err) { return res.status(500).send(err); }
-        console.log(department.name, "added.");
-        return res.status(201).json(department);
-    });
+    department.save()
+    .then(result => {
+        console.log(result);
+        res.status(201).json({
+          message:"Department has been created",
+          department: result,
+          links:[{
+            rel: "All departments",
+            type: 'GET',
+            hrel: "http://localhost:3000/api/departments/",
+          },{
+            rel: "self",
+            type: 'PATCH',
+            hrel:"http://localhost:3000/api/departments/" + result._id,
+          },
+          {
+            rel: "self",
+            type: 'GET',
+            hrel:"http://localhost:3000/api/departments/" + result._id,
+          },
+          {
+            rel: "self",
+            type: 'DELETE',
+            hrel:"http://localhost:3000/api/departments/" + result._id,
+          },
+  
+        ]
+        })
+  
+        })
+        .catch(err => {
+         console.log(err);
+         res.status(500).json({
+          error: err
+         });
+        })
 });
 
 router.get('/api/departments', checkAuth, function(req, res, next) {
     Department.find(function(err, departments) {
         if (err) { return res.status(500).send(err); }
         res.json({'departments': departments});
-        return res.status(200);
+        res.status(200).json({
+            departments: departments,
+            links:[
+              {
+                rel: "create",
+                type: 'POST',
+                hrel:"http://localhost:3000/api/departments/"
+              }
+            ]
+        })
     });
 });
 
@@ -28,7 +68,29 @@ router.get('/api/departments/:id', checkAuth, function(req, res, next) {
         if (department === null) {
             return res.status(404).json({'message': 'Department not found!'});
         }
-        return res.status(200).send(department);
+        return res.status(200).json({
+            department,
+            links:[{
+             rel: "All departments",
+             type: 'GET',
+             hrel: "http://localhost:3000/api/departments/",
+           },{
+             rel: "self",
+             type: 'PATCH',
+             hrel:"http://localhost:3000/api/departments/" + department._id,
+           },
+           { rel: "create",
+             type: 'POST',
+             hrel:"http://localhost:3000/api/departments/",
+             },
+             {
+             rel: "self",
+             type: 'DELETE',
+             hrel:"http://localhost:3000/api/departments/" + department._id,
+           },
+      
+         ]
+       });
     });
 });
 
@@ -43,8 +105,35 @@ router.patch('/api/departments/:id', checkAuth, function(req, res,next) {
         department.id = (req.body.id || department.id);
         department.name = (req.body.name || department.name);
         department.campus = (req.body.campus || department.campus);
-        department.save();
-        return res.status(201).json(department);
+        department.save()
+        .then(result => {
+            console.log(result);
+          res.status(201).json({
+            message:"Department has been patched",
+            department: result,
+            links:[{
+              rel: "All departments",
+              type: 'GET',
+              hrel: "http://localhost:3000/api/departments/",
+            },
+            { rel: "create",
+              type: 'POST',
+              hrel:"http://localhost:3000/api/departments/",
+            },
+            {
+              rel: "self",
+              type: 'GET',
+              hrel:"http://localhost:3000/api/departments/" + result._id,
+            },
+            {
+              rel: "self",
+              type: 'DELETE',
+              hrel:"http://localhost:3000/api/departments/" + result._id,
+            },
+      
+            ]
+    });
+});
     });
 });
 
@@ -58,16 +147,64 @@ router.put('/api/departments/:id', checkAuth, function(req, res, next) {
         department.id = req.body.id;
         department.name = req.body.name;
         department.campus = req.body.campus;
-        department.save();
-        return res.status(201).json(department);
+        department.save()
+        .then(result => {
+            console.log(result);
+          res.status(201).json({
+            message:"Department has been put",
+            department: result,
+            links:[{
+              rel: "All departments",
+              type: 'GET',
+              hrel: "http://localhost:3000/api/departments/",
+            },
+            { rel: "create",
+              type: 'POST',
+              hrel:"http://localhost:3000/api/departments/",
+            },
+            {
+              rel: "self",
+              type: 'GET',
+              hrel:"http://localhost:3000/api/departments/" + result._id,
+            },
+            {
+              rel: "self",
+              type: 'DELETE',
+              hrel:"http://localhost:3000/api/departments/" + result._id,
+            },
+      
+          ]
+          })
+      
+          })
+          .catch(err => {
+           console.log(err);
+           res.status(500).json({
+            error: err
+          })
     });
+});
 });
 
 router.delete('/api/departments', checkAuth, function(req,res,next){
     Department.deleteMany(function(err, department) {
         if (err) { return res.status(500).send(err); }
-       return  res.status(200).json(department);
+        return res.status(200).json({
+            department,
+            links:[{
+             rel: "All departments",
+             type: 'GET',
+             hrel: "http://localhost:3000/api/departments/",
+           },
+           { rel: "create",
+             type: 'POST',
+             hrel:"http://localhost:3000/api/departments/",
+             },
+         ]
+       });
+
     });
+    
 });
 
 router.delete('/api/departments/:id', checkAuth, function(req, res, next) {
@@ -77,7 +214,30 @@ router.delete('/api/departments/:id', checkAuth, function(req, res, next) {
         if (department === null) {
             return res.status(404).json({'message': 'Department not found'});
         }
-       return res.status(200).json(department);
+        return res.status(200).json({
+            department,
+            links:[{
+             rel: "All departments",
+             type: 'GET',
+             hrel: "http://localhost:3000/api/departments/",
+           },
+           { rel: "create",
+             type: 'POST',
+             hrel:"http://localhost:3000/api/departments/",
+             },
+             {
+              rel: "self",
+              type: 'PATCH',
+              hrel:"http://localhost:3000/api/departmens/" + department._id,
+            },
+            {
+            rel: "self",
+            type: 'DELETE',
+            hrel:"http://localhost:3000/api/departments/" + department._id,
+          },
+         ]
+       });
+        
     });
 });
 

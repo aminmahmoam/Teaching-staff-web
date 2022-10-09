@@ -8,20 +8,59 @@ const checkAuth = require('../middleware/check-auth');
 
 router.post('/api/courses', checkAuth, function(req, res, next){
   var course = new Course(req.body);
-  course.save(function(err, course) {
-      if (err) { return res.status(500).send(err); }
-      console.log(course.name, "added.");
-      return res.status(201).json(course);
-  })
-});
+  course.save()
+      .then(result => {
+      console.log(result);
+      res.status(201).json({
+        message:"Course has been created",
+        course: result,
+        links:[{
+          rel: "All courses",
+          type: 'GET',
+          hrel: "http://localhost:3000/api/courses/",
+        },{
+          rel: "self",
+          type: 'PATCH',
+          hrel:"http://localhost:3000/api/courses/" + result._id,
+        },
+        {
+          rel: "self",
+          type: 'GET',
+          hrel:"http://localhost:3000/api/courses/" + result._id,
+        },
+        {
+          rel: "self",
+          type: 'DELETE',
+          hrel:"http://localhost:3000/api/courses/" + result._id,
+        },
+
+      ]
+      })
+
+      })
+      .catch(err => {
+       console.log(err);
+       res.status(500).json({
+        error: err
+       });
+      })
+  });
 
 
 router.get('/api/courses', checkAuth, function(req, res, next) {
   Course.find(function(err, courses) {
       if (err) { return res.status(500).send(err); }
-      res.json({courses: courses, decoded: req.userData});
-      res.status(200);
-      res.send;
+      res.status(200).json({
+        courses: courses,
+        decoded: req.userData,
+        links:[
+          {
+            rel: "create",
+            type: 'POST',
+            hrel:"http://localhost:3000/api/courses/"
+          }
+      ]
+    })
   });
 });
  
@@ -34,7 +73,32 @@ router.get("/api/courses/:id", checkAuth, function (req, res, next) {
       if (err) {
         return res.status(500).send(err);
       }
-      return res.status(200).send(course);
+      if (course === null) {
+        return res.status(404).json({'message': 'Course not found!'});
+    }
+    return res.status(200).json({
+      course,
+      links:[{
+       rel: "All courses",
+       type: 'GET',
+       hrel: "http://localhost:3000/api/courses/",
+     },{
+       rel: "self",
+       type: 'PATCH',
+       hrel:"http://localhost:3000/api/courses/" + course._id,
+     },
+     { rel: "create",
+       type: 'POST',
+       hrel:"http://localhost:3000/api/courses/",
+       },
+       {
+       rel: "self",
+       type: 'DELETE',
+       hrel:"http://localhost:3000/api/courses/" + course._id,
+     },
+
+   ]
+ });
     });
 });
 
@@ -53,8 +117,42 @@ router.patch('/api/courses/:id', function(req, res,next) {
         course.students = (req.body.students || course.students);
         course.lectureDates = (req.body.lectureDates || course.lectureDates)
         course.text = (req.body.text || course.text)
-        course.save();
-        return res.status(201).json(course);
+        course.save()
+        .then(result => {
+          console.log(result);
+        res.status(201).json({
+          message:"Course has been patched",
+          course: result,
+          links:[{
+            rel: "All courses",
+            type: 'GET',
+            hrel: "http://localhost:3000/api/courses/",
+          },
+          { rel: "create",
+            type: 'POST',
+            hrel:"http://localhost:3000/api/courses/",
+          },
+          {
+            rel: "self",
+            type: 'GET',
+            hrel:"http://localhost:3000/api/courses/" + result._id,
+          },
+          {
+            rel: "self",
+            type: 'DELETE',
+            hrel:"http://localhost:3000/api/courses/" + result._id,
+          },
+    
+        ]
+        })
+    
+        })
+        .catch(err => {
+         console.log(err);
+         res.status(500).json({
+          error: err
+         });
+        })
     });
 });
 
@@ -70,8 +168,42 @@ router.put('/api/courses/:id', checkAuth, function(req, res,next) {
         course.department = req.body.department;
         course.staffs = (req.body.staffs || course.staffs);
         course.students = (req.body.students || course.students);
-       course.save();
-       return res.status(201).json(course);
+       course.save()
+       .then(result => {
+        console.log(result);
+      res.status(201).json({
+        message:"Course has been put",
+        course: result,
+        links:[{
+          rel: "All courses",
+          type: 'GET',
+          hrel: "http://localhost:3000/api/courses/",
+        },
+        { rel: "create",
+          type: 'POST',
+          hrel:"http://localhost:3000/api/courses/",
+        },
+        {
+          rel: "self",
+          type: 'GET',
+          hrel:"http://localhost:3000/api/courses/" + result._id,
+        },
+        {
+          rel: "self",
+          type: 'DELETE',
+          hrel:"http://localhost:3000/api/courses/" + result._id,
+        },
+  
+      ]
+      })
+  
+      })
+      .catch(err => {
+       console.log(err);
+       res.status(500).json({
+        error: err
+       });
+      })
     });
 });
 
@@ -79,7 +211,19 @@ router.put('/api/courses/:id', checkAuth, function(req, res,next) {
 router.delete('/api/courses', checkAuth, function(req,res,next){
     Course.deleteMany(function(err, course) {
         if (err) { return res.status(500).send(err); }
-        return res.status(200).json(course);
+        return res.status(200).json({
+          course,
+          links:[{
+           rel: "All courses",
+           type: 'GET',
+           hrel: "http://localhost:3000/api/courses/",
+         },
+         { rel: "create",
+           type: 'POST',
+           hrel:"http://localhost:3000/api/courses/",
+           },
+       ]
+     });
     });
 });
 
@@ -91,7 +235,30 @@ router.delete('/api/courses/:id', checkAuth, function(req, res, next) {
         if (course === null) {
             return res.status(404).json({'message': 'Course not found'});
         }
-       return  res.status(200).json(course);
+        return res.status(200).json({
+          course,
+          links:[{
+           rel: "All courses",
+           type: 'GET',
+           hrel: "http://localhost:3000/api/courses/",
+         },
+         { rel: "create",
+           type: 'POST',
+           hrel:"http://localhost:3000/api/courses/",
+           },
+           {
+            rel: "self",
+            type: 'PATCH',
+            hrel:"http://localhost:3000/api/courses/" + course._id,
+          },
+          {
+          rel: "self",
+          type: 'DELETE',
+          hrel:"http://localhost:3000/api/courses/" + course._id,
+        },
+       ]
+     });
+       
     });
 });
 
