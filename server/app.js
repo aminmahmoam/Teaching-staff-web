@@ -3,7 +3,16 @@ var mongoose = require('mongoose');
 var morgan = require('morgan');
 var path = require('path');
 var cors = require('cors');
+//var multer = require('multer');
+var fileupload = require("express-fileupload");
 var history = require('connect-history-api-fallback');
+var staffsController = require('./controllers/staffs');
+var coursesController = require('./controllers/courses');
+var departmentsController = require('./controllers/departments');
+var studentsController = require('./controllers/students');
+
+//var methodOverride = require('method-override');
+
 
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
@@ -19,9 +28,11 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, 
     console.log(`Connected to MongoDB with URI: ${mongoURI}`);
 });
 
+
 // Create Express app
 var app = express();
 // Parse requests of content-type 'application/json'
+app.use(fileupload());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // HTTP request logger
@@ -29,11 +40,26 @@ app.use(morgan('dev'));
 // Enable cross-origin resource sharing for frontend must be registered before api
 app.options('*', cors());
 app.use(cors());
-
 // Import routes
 app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT342 backend ExpressJS project!'});
 });
+
+app.use(staffsController);
+app.use(coursesController);
+app.use(departmentsController);
+app.use(studentsController);
+
+
+app.post('/upload', (req,res) => {
+    let myFiles = req.files.myFiles
+    res.send(`${myFiles}`)
+})
+
+
+// override with the X-HTTP-Method-Override header in the request
+//app.use(methodOverride('X-HTTP-Method-Override'));
+
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {

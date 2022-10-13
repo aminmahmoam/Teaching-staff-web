@@ -1,17 +1,736 @@
 {
 	"info": {
-		"_postman_id": "f7ee95b5-9cb9-442f-a6a9-42de46138872",
+		"_postman_id": "268333ff-2df6-46b3-845a-513abc5ad744",
 		"name": "server",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23102291"
 	},
 	"item": [
 		{
-			"name": "GET /api",
+			"name": "Post a staff",
 			"event": [
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "b58d92ec-5214-450c-adb0-28e068aa71b9",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"Staff1\", jsonData.staff._id);",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"SSN\" :\"200506-1010\",\n\"firstName\" : \"Patrik\",\n\"lastName\":\"Samcenko\",\n\"educationalDegree\": \"phd\",\n\"role\": \"Teacher\",\n\"salary\": 20000500.00,\n\"telephone\": 76003010,\n\"emailAddress\": \"patrik@icloud.com\",\n\"address\": \"smyckegatan\",\n\"password\": \"123456789\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/staffs",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staffs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"Token\", jsonData.token);",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"emailAddress\": \"patrik@icloud.com\",\r\n    \"password\": \"123456789\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post a department",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"Dep1\", jsonData.department._id);",
+							"",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"B3\",\n    \"campus\": \"Lindholmen\",\n    \"name\": \"Applied information technology\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/departments",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"departments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post a student",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"Student1\", jsonData.student._id);",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"SSN\": \"657483-0123\",\n    \"firstName\": \"Mike\",\n    \"lastName\": \"Berger\",\n    \"emailAddress\": \"Mike@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/students",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post a course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"Course1\", jsonData.course._id);",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"DIT115\",\n    \"name\": \"Software analysis\",\n    \"text\": \"\",\n    \"lectureDates\": [\"1664402400\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/courses",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post a specific student for a course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"Student2\", jsonData.students[0]._id);",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"SSN\": \"666666-6666\",\n    \"firstName\": \"Peter\",\n    \"lastName\": \"Anderson\",\n    \"emailAddress\": \"pete123@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/courses/{{Course1}}/students",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"{{Course1}}",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post a course for a staff",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"Course2\", jsonData.courses[0]._id);",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"DIT113\",\n    \"name\": \"Math\",\n    \"text\": \"\",\n    \"lectureDates\":[\"1664402400\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/staffs/{{Staff1}}/courses",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staffs",
+						"{{Staff1}}",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post department of a course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"Dep2\", jsonData.department._id);",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"B123\",\n    \"campus\": \"Lindholmen\",\n    \"name\": \"Business\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/courses/{{Course1}}/departments",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"{{Course1}}",
+						"departments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all staffs",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/staffs",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staffs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a specific staff",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/staffs/{{Staff1}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staffs",
+						"{{Staff1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all courses",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/courses",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a specific course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/courses/{{Course1}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"{{Course1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all courses of a staff",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
 						"exec": [
 							""
 						],
@@ -26,15 +745,1516 @@
 						"key": "Accept",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "{{host}}/api",
+					"raw": "{{host}}/api/staffs/{{Staff1}}/courses",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"api"
+						"api",
+						"staffs",
+						"{{Staff1}}",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all departments",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/departments",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"departments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a specific department",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/departments/{{Dep1}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"departments",
+						"{{Dep1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all students",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/students",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get the department of a course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/courses/{{Course1}}/departments",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"{{Course1}}",
+						"departments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a specific student",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/students/{{Student1}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"students",
+						"{{Student1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a specific student of a course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/courses/{{Course1}}/students/{{Student2}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"{{Course1}}",
+						"students",
+						"{{Student2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a specific course of a staff",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/staffs/{{Staff1}}/courses/{{Course2}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staffs",
+						"{{Staff1}}",
+						"courses",
+						"{{Course2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all students of a course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/courses/{{Course1}}/students",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"{{Course1}}",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get filter departments",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/filter?name=Business",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Business"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get sorted courses",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/sort",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"sort"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch a specific course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful Patch request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Updated Data Structure\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/courses/{{Course1}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"{{Course1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put a specific course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful Put request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"DIT333\",\n    \"name\": \"Updated Data Structure V2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/courses/{{Course1}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"{{Course1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch a specific department",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful Patch request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"B11\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/departments/{{Dep1}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"departments",
+						"{{Dep1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put a specific department",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful Put request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"B22\",\n    \"campus\": \"Johanebarg\",\n    \"name\": \"Biomedicine\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/departments/{{Dep1}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"departments",
+						"{{Dep1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch a specific student",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful Patch request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailAddress\": \"jesus@icloud.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/students/{{Student1}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"students",
+						"{{Student1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put a specific student",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful Put request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"SSN\": \"657483-0123\",\n    \"firstName\": \"jesus\",\n    \"lastName\": \"christ\",\n    \"emailAddress\": \"jesus@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/students/{{Student1}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"students",
+						"{{Student1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch a specific staff",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful Patch request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"lastName\": \"Jackson\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/staffs/{{Staff1}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staffs",
+						"{{Staff1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put a specific staff",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful Put request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"SSN\": \"00050000-000\",\n    \"firstName\": \"Ann\",\n    \"lastName\": \"fard\",\n    \"educationalDegree\": \"phd\",\n    \"role\": \"TA\",\n    \"salary\": 50000,\n    \"telephone\": 7600000001,\n    \"emailAddress\": \"anna@gmail.com\",\n    \"address\": \"mandolingatan 50\",\n    \"password\": \"222243\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/staffs/{{Staff1}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staffs",
+						"{{Staff1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a specific student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/students/{{Student1}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"students",
+						"{{Student1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a specific department",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/departments/{{Dep1}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"departments",
+						"{{Dep1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a specific student for a course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/courses/{{Course1}}/students/{{Student2}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"{{Course1}}",
+						"students",
+						"{{Student2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a specific course",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/courses/{{Course1}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"{{Course1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a specific staff",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/staffs/{{Staff1}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staffs",
+						"{{Staff1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all courses",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/courses/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all departments",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/departments",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"departments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all students",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/students",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all staffs",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "loginToken",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/staffs",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staffs"
 					]
 				}
 			},
@@ -45,7 +2265,6 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "05864cff-5cba-4070-bac3-a59328954ebf",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -55,7 +2274,6 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "e9c319be-3306-4fc5-ba34-fcf64391213a",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -65,11 +2283,9 @@
 	],
 	"variable": [
 		{
-			"id": "cd185905-a834-4211-8030-583d17702534",
 			"key": "host",
 			"value": "http://localhost:3000",
 			"type": "string"
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
