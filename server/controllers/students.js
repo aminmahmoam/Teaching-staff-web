@@ -10,7 +10,7 @@ router.post('/api/students', checkAuth, function(req, res, next){
     student.save()
     .then(result => {
         console.log(result);
-        res.status(201).json({
+        return res.status(201).json({
           message:"Student has been created",
           student: result,
           links:[{
@@ -39,7 +39,7 @@ router.post('/api/students', checkAuth, function(req, res, next){
         })
         .catch(err => {
          console.log(err);
-         res.status(500).json({
+         return res.status(500).json({
           error: err
          });
         })
@@ -48,7 +48,7 @@ router.post('/api/students', checkAuth, function(req, res, next){
 router.get('/api/students', checkAuth, function(req, res, next) {
     Student.find(function(err, students) {
         if (err) { return res.status(500).send(err);  }
-        res.status(200).json({
+        return res.status(200).json({
             students: students,
             links:[
               {
@@ -109,7 +109,7 @@ router.patch('/api/students/:id', checkAuth, function(req, res,next) {
         student.save()
         .then(result => {
             console.log(result);
-          res.status(201).json({
+          return res.status(201).json({
             message:"Student has been patched",
             student: result,
             links:[{
@@ -138,7 +138,7 @@ router.patch('/api/students/:id', checkAuth, function(req, res,next) {
           })
           .catch(err => {
            console.log(err);
-           res.status(500).json({
+           return res.status(500).json({
             error: err
            });
           })
@@ -160,7 +160,7 @@ router.put('/api/students/:id', checkAuth, function(req, res,next) {
         student.save()
         .then(result => {
             console.log(result);
-          res.status(201).json({
+          return res.status(201).json({
             message:"Student has been put",
             student: result,
             links:[{
@@ -189,7 +189,7 @@ router.put('/api/students/:id', checkAuth, function(req, res,next) {
           })
           .catch(err => {
            console.log(err);
-           res.status(500).json({
+           return res.status(500).json({
             error: err
            });
           })

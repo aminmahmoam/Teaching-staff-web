@@ -9,7 +9,7 @@ router.post('/api/departments', checkAuth, function(req, res, next){
     department.save()
     .then(result => {
         console.log(result);
-        res.status(201).json({
+        return res.status(201).json({
           message:"Department has been created",
           department: result,
           links:[{
@@ -38,7 +38,7 @@ router.post('/api/departments', checkAuth, function(req, res, next){
         })
         .catch(err => {
          console.log(err);
-         res.status(500).json({
+         return res.status(500).json({
           error: err
          });
         })
@@ -47,8 +47,7 @@ router.post('/api/departments', checkAuth, function(req, res, next){
 router.get('/api/departments', checkAuth, function(req, res, next) {
     Department.find(function(err, departments) {
         if (err) { return res.status(500).send(err); }
-        res.json({'departments': departments});
-        res.status(200).json({
+        return res.status(200).json({
             departments: departments,
             links:[
               {
@@ -62,8 +61,7 @@ router.get('/api/departments', checkAuth, function(req, res, next) {
 });
 
 router.get('/api/departments/:id', checkAuth, function(req, res, next) {
-    var id = req.params.id;
-    Department.findById(id, function(err, department) {
+    Department.findById({_id: req.params.id}).exec(function(err, department) {
         if (err) { return res.status(500).send(err); }
         if (department === null) {
             return res.status(404).json({'message': 'Department not found!'});
@@ -108,7 +106,7 @@ router.patch('/api/departments/:id', checkAuth, function(req, res,next) {
         department.save()
         .then(result => {
             console.log(result);
-          res.status(201).json({
+          return res.status(201).json({
             message:"Department has been patched",
             department: result,
             links:[{
@@ -150,7 +148,7 @@ router.put('/api/departments/:id', checkAuth, function(req, res, next) {
         department.save()
         .then(result => {
             console.log(result);
-          res.status(201).json({
+          return res.status(201).json({
             message:"Department has been put",
             department: result,
             links:[{
@@ -179,7 +177,7 @@ router.put('/api/departments/:id', checkAuth, function(req, res, next) {
           })
           .catch(err => {
            console.log(err);
-           res.status(500).json({
+           return res.status(500).json({
             error: err
           })
     });
@@ -210,7 +208,7 @@ router.delete('/api/departments', checkAuth, function(req,res,next){
 router.delete('/api/departments/:id', checkAuth, function(req, res, next) {
     var id = req.params.id;
     Department.findOneAndDelete({_id: id}, function(err, department) {
-        if (err) { res.status(500).send(err); }
+        if (err) { return res.status(500).send(err); }
         if (department === null) {
             return res.status(404).json({'message': 'Department not found'});
         }
@@ -246,15 +244,12 @@ router.get('/api/filter',(req,res,next)=>{
  var selectedName =req.query.name;
 console.log("finding");
    // Department.find({ name: { $gte: selectedName } }).exec(function (
-    Department.find({ name: selectedName}).exec(function (
-  err,
-  department
-) {
+    Department.find({ name: selectedName}).exec(function (err,department) {
   if (err) {
     return res.status(500).send(err);
   }
   console.log("success");
-  res.json({'departments': department});
+   return res.json({'departments': department});
 });
 
 });

@@ -45,4 +45,14 @@ export default {
   width: 100%;
   height: 100%;
 }
+@media (max-width: 1000px){
+  .calendar {
+  padding: 1px;
+  padding-right: 0;
+  padding-top: 10px;
+  width: 100%;
+  height: 100%;
+  font-size: 10px;
+}
+}
 </style>

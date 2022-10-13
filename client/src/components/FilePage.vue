@@ -86,13 +86,19 @@ button {
     background-color:  darkcyan;
     text-decoration-color: black;
 }
-@media(max-width: 768px){
+#file {
+    width: 90%;
+}
+@media(max-width: 1000px){
   h2 {
   font-size: 1rem;
   margin-top: 5px;
 }
 button {
     margin-top: 15px;
+}
+#file {
+    width: 80%;
 }
 }
 </style>

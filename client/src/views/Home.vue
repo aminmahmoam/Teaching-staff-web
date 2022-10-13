@@ -2,9 +2,10 @@
 <div class="home">
   <p class="overview">Overview</p>
 <div class="cardbox">
-  <li class="boxlist"><div class="card">
+  <div class="card">
     <div>
       <div class="cardname">Next Lecture</div>
+      <div class="separator"></div>
       <div class="contentTime">{{lectureDate}}</div>
       <div class="content">{{lectureName}}</div>
     </div>
@@ -13,22 +14,10 @@
   <div class="card">
     <div>
       <div class="cardname">Next Payment</div>
-      <div class="paymentDay">In <span class="thePDay">{{payDay}}</span> days</div>
+      <div class="separator"></div>
+      <div class="paymentDay"><span class="thePDay">{{payDay}}</span></div>
     </div>
   </div>
-  </li>
-  <div class="card">
-    <div>
-      <div class="cardname">To-do List</div>
-      <li class="toDo">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-      </li>
-    </div>
-  </div>
-
 </div>
 <p>Courses</p>
 <ul class="list-of-courses-ul">
@@ -55,6 +44,7 @@ export default {
     this.getAllCourses()
     this.setNextLecture()
     this.setNextPayment()
+    this.setToDoList()
   },
   data() {
     return {
@@ -108,7 +98,7 @@ export default {
             const dateSize = response.data.courses[i].lectureDates.length
             for (let j = 0; j < dateSize; j++) {
               this.lecturesDates.push(response.data.courses[i].lectureDates[j])
-              if (response.data.courses[i].lectureDates[j] <= smallest) {
+              if (response.data.courses[i].lectureDates[j] <= smallest && response.data.courses[i].lectureDates[j] >= Date.now()) {
                 smallest = response.data.courses[i].lectureDates[j]
                 earliestLN = this.courses[i].name
               }
@@ -128,12 +118,12 @@ export default {
         }
       })
         .then(response => {
-          const size = response.data.paymentDates.length
-          let smallest = response.data.paymentDates[0]
+          const size = response.data.staff.paymentDates.length
+          let smallest = response.data.staff.paymentDates[0]
           for (let i = 0; i < size; i++) {
-            this.paymentDates.push(response.data.paymentDates[0])
-            if (response.data.paymentDates[0] <= smallest) {
-              smallest = response.data.paymentDates[0]
+            this.paymentDates.push(response.data.staff.paymentDates[i])
+            if (response.data.staff.paymentDates[i] <= smallest && response.data.staff.paymentDates[i] >= Date.now()) {
+              smallest = response.data.staff.paymentDates[i]
             }
           }
           this.payDay = new Date(smallest * 1000)
@@ -156,14 +146,16 @@ export default {
   position: relative;
   width: 100%;
   padding: 20px;
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
+  display: flex;
   grid-gap: 30px;
+  justify-content: space-between;
 }
 .card {
   position: relative;
   background: white;
-  padding: 8px;
+  height: 100px;
+  width: 1000px;
+  padding: 0px;
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
@@ -197,10 +189,18 @@ p {
   font-weight: 3000;
   letter-spacing: 1px;
 }
+.separator {
+  width: 150px;
+  height: 4px;
+  background-color: darkcyan;
+  margin-left: 215px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
 
-@media (max-width: 768px){
+@media (max-width: 1000px){
   p{
-  margin-left: 60px;
+  margin-left: -58%;
   margin-top: 13px;
   margin-bottom: 5px;
   color: #2c3e50;
@@ -215,15 +215,19 @@ p {
 }
 .cardbox {
   position: relative;
-  width: 100%;
+  width: 120%;
   padding: 6px;
-  display: grid;
+  display: flex;
+  justify-content: space-between;
   grid-template-columns: repeat(2,1fr);
   grid-gap: 20px;
+  margin-left: 5%;
 }
 .card {
   position: relative;
   background: white;
+  height: 100%;
+  width: 200%;
   padding: 3px;
   border-radius: 3px;
   display: flex;
@@ -249,6 +253,19 @@ p {
 .list-of-courses-li {
   display: inline-block;
   margin: 25px;
+
+}
+.separator {
+  width: 100%;
+  height: 4px;
+  background-color: darkcyan;
+  margin-left: 2%;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.list-of-courses-li {
+  display: inline-block;
+  margin-left: 5%;
 
 }
 }

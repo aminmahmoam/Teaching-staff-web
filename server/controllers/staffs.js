@@ -6,7 +6,6 @@ var Course = require('../models/course');
 const jwt= require("jsonwebtoken");
 const mongoose = require('mongoose');
 const checkAuth = require('../middleware/check-auth');
-const staff = require('../models/staff');
 
 router.post('/api/login', (req,res,next) =>{
     Staff.findOne({emailAddress: req.body.emailAddress})
@@ -28,29 +27,26 @@ router.post('/api/login', (req,res,next) =>{
             emailAddress: staff.emailAddress,
             _id: staff._id
         },
-        process.env.JWT_KEY,
-        {
-            expiresIn: "1h"
-        });
+        process.env.JWT_KEY);
         console.log(token)
         return res.status(200).json({
             message: 'Authentication succussful',
             token: token
         });
     }
-    res.status(401).json({
+    return res.status(401).json({
         message:'Authentication failed'
     });
     })
 })
     .catch(err =>{
         console.log(err);
-        res.status(500)
+        return res.status(500)
     })
     
 });
 
-router.post('/api/staffs', checkAuth, function(req, res, next){
+router.post('/api/staffs', function(req, res, next){
    var password = req.body.password;
     bcrypt.hash(password, 10, (err,hash) =>{
         if(err){
@@ -74,7 +70,7 @@ router.post('/api/staffs', checkAuth, function(req, res, next){
       staff.save()
       .then(result => {
         console.log(result);
-      res.status(201).json({
+      return res.status(201).json({
         message:"Staff has been created",
         staff: result,
         links:[{
@@ -103,7 +99,7 @@ router.post('/api/staffs', checkAuth, function(req, res, next){
       })
       .catch(err => {
        console.log(err);
-       res.status(500).json({
+       return res.status(500).json({
         error: err
        });
       })
@@ -114,7 +110,7 @@ router.post('/api/staffs', checkAuth, function(req, res, next){
 router.get('/api/staffs', checkAuth, function(req, res, next) {
     Staff.find(function(err, staffs) {
         if (err) { return res.status(500).send(err); }
-          res.status(200).json({
+          return res.status(200).json({
             staffs,
             links:[
               {
@@ -179,10 +175,11 @@ router.patch('/api/staffs/:id', checkAuth, function(req, res,next) {
         staff.telephone =(req.body.telephone || staff.telephone);
         staff.emailAddress = (req.body.emailAddress || staff.emailAddress);
         staff.address = (req.body.address || staff.address);
+        staff.paymentDates = (req.body.paymentDates || staff.paymentDates )
     staff.save()
     .then(result => {
       console.log(result);
-    res.status(201).json({
+    return res.status(201).json({
       message:"Staff has been patched",
       staff: result,
       links:[{
@@ -211,7 +208,7 @@ router.patch('/api/staffs/:id', checkAuth, function(req, res,next) {
     })
     .catch(err => {
      console.log(err);
-     res.status(500).json({
+     return res.status(500).json({
       error: err
      });
     })
@@ -221,7 +218,9 @@ router.patch('/api/staffs/:id', checkAuth, function(req, res,next) {
 router.put('/api/staffs/:id', checkAuth, function(req, res,next) {
     var id = req.params.id;
     Staff.findById(id, function(err, staff) {
-        if (err) { return next(err); }
+        if (err) { res.status(500).json({
+          error: err
+         }); }
         if (staff == null) {
         return res.status(404).json({"message": "Staff not found"});
         }
@@ -237,7 +236,7 @@ router.put('/api/staffs/:id', checkAuth, function(req, res,next) {
     staff.save()
     .then(result => {
       console.log(result);
-    res.status(201).json({
+    return res.status(201).json({
       message:"Staff has been put",
       staff: result,
       links:[{
@@ -266,7 +265,7 @@ router.put('/api/staffs/:id', checkAuth, function(req, res,next) {
     })
     .catch(err => {
      console.log(err);
-     res.status(500).json({
+     return res.status(500).json({
       error: err
      });
     })
@@ -330,14 +329,14 @@ router.get("/api/staffs/:st_id/courses/:co_id", checkAuth, function (req, res, n
         .populate({path: "courses", 
           match: { _id: { $eq: req.params.co_id } },
         })
-        .exec(function (err, course, staff) {   
+        .exec(function (err, staff, course) {   
           if (course === null || staff === null) {
             return res.status(404).json({'message': 'Not found!'});
         }
-        console.log("everything good sofar!"); 
           if (err) {
             return res.status(500).send(err);   //returns this error
           } 
+
           console.log(staff.courses);
           return res.status(200).send(staff.courses);
           
@@ -381,22 +380,4 @@ router.get("/api/staffs/:st_id/courses/:co_id", checkAuth, function (req, res, n
       });
     });
     
-    
-  //task 3 
-  router.delete("/api/staffs/:staff_id/courses/:co_id", checkAuth, function (req, res, next) {
-      Staff.findByIdAndUpdate({_id: req.params.staff_id})
-      .populate("courses")
-      .exec(function (err, course, staff){
-        if(err) {
-          return res.status(500).send(err);
-        }
-        if(course === null || staff === null){
-          return res.status(404).json({message: "Not found!"});
-        }
-        staff.courses.pull({_id: req.params.co_id});
-        staff.save();
-        return res.status(200).send(staff.courses);
-      });
-  });
-
 module.exports = router;

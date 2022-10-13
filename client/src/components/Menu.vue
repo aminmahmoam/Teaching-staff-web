@@ -98,7 +98,7 @@ margin-bottom: 3rem;
   width: 150px;
   max-width: 150px;
 }
-@media (max-width: 768px){
+@media (max-width: 1000px){
   aside {
   padding: 5px 5px;
   display: flex;

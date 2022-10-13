@@ -11,7 +11,7 @@ router.post('/api/courses', checkAuth, function(req, res, next){
   course.save()
       .then(result => {
       console.log(result);
-      res.status(201).json({
+      return res.status(201).json({
         message:"Course has been created",
         course: result,
         links:[{
@@ -40,7 +40,7 @@ router.post('/api/courses', checkAuth, function(req, res, next){
       })
       .catch(err => {
        console.log(err);
-       res.status(500).json({
+       return res.status(500).json({
         error: err
        });
       })
@@ -50,7 +50,7 @@ router.post('/api/courses', checkAuth, function(req, res, next){
 router.get('/api/courses', checkAuth, function(req, res, next) {
   Course.find(function(err, courses) {
       if (err) { return res.status(500).send(err); }
-      res.status(200).json({
+      return res.status(200).json({
         courses: courses,
         decoded: req.userData,
         links:[
@@ -120,7 +120,7 @@ router.patch('/api/courses/:id', function(req, res,next) {
         course.save()
         .then(result => {
           console.log(result);
-        res.status(201).json({
+        return res.status(201).json({
           message:"Course has been patched",
           course: result,
           links:[{
@@ -149,7 +149,7 @@ router.patch('/api/courses/:id', function(req, res,next) {
         })
         .catch(err => {
          console.log(err);
-         res.status(500).json({
+         return res.status(500).json({
           error: err
          });
         })
@@ -171,7 +171,7 @@ router.put('/api/courses/:id', checkAuth, function(req, res,next) {
        course.save()
        .then(result => {
         console.log(result);
-      res.status(201).json({
+      return res.status(201).json({
         message:"Course has been put",
         course: result,
         links:[{
@@ -200,7 +200,7 @@ router.put('/api/courses/:id', checkAuth, function(req, res,next) {
       })
       .catch(err => {
        console.log(err);
-       res.status(500).json({
+       return res.status(500).json({
         error: err
        });
       })
@@ -231,7 +231,7 @@ router.delete('/api/courses', checkAuth, function(req,res,next){
 router.delete('/api/courses/:id', checkAuth, function(req, res, next) {
     var id = req.params.id;
     Course.findOneAndDelete({_id: id}, function(err, course) {
-        if (err) {res.status(500).send(err); }
+        if (err) {return res.status(500).send(err); }
         if (course === null) {
             return res.status(404).json({'message': 'Course not found'});
         }
@@ -271,7 +271,7 @@ router.get('/api/courses/:id/students', checkAuth, function(req, res, next){
             return res.status(404).json({'message': 'Course not found'});
         }
        console.log(course.students);
-       res.status(200).json({students: course.students});
+       return res.status(200).json({students: course.students});
     });
 });
 
@@ -401,19 +401,10 @@ router.get('/api/sort',checkAuth,function(req, res, next) {
         return b[0]-a[0];
       });
       */
-      res.json(sortedCourses);
-      res.status(200);
+      
+      return res.status(200).json(sortedCourses);
     });
 
 });
-  //task 4.a (field selection) ⛔️
-router.get('/api/selection', function(req, res, next) {
-      Course.find(function(err, courses) {
-          if (err) { return res.status(500).send(err);  }
-          res.json({'courses': courses});
-         return res.status(200);
-    });
-});
-
 
 module.exports = router;

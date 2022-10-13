@@ -13,7 +13,7 @@
     </div>
     <div class="tt" v-if="!searched">
      <div v-for="student in students" v-bind:key="student._id">
-        <student-item v-bind:student="student"/>
+        <student-item v-bind:student="student" v-on:del-student="deleteStudent"/>
      </div>
      </div>
      <div class="tt" v-else-if="searched">
@@ -63,8 +63,23 @@ export default {
         }
       })
         .then(response => {
-          alert('The student was added successfully.')
+          alert('This button is just for the sake of the requiremnets and in real life will not be added to the system.')
           this.students = response.data.students
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    deleteStudent(id) {
+      Api.delete(`/courses/${this.$route.params.id}/students/${id}`, {
+        headers: {
+          loginToken: localStorage.loginToken
+        }
+      })
+        .then(response => {
+          const index = this.students.findIndex(student => student._id === id)
+          this.students.splice(index, 1)
+          alert('This button is just for the sake of the requiremnets and in real life will not be added to the system.')
         })
         .catch(error => {
           console.log(error)
@@ -153,7 +168,7 @@ export default {
       height: 2rem;
       border: none;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 1000px) {
       .tt {
     display: flex;
     flex-direction: column;
@@ -161,7 +176,7 @@ export default {
     height: 150px;
     padding: 4px;
     border-radius: 5px;
-    width: 17rem;
+    width: 90%;
     margin-left: 10px;
 
   }
@@ -169,7 +184,7 @@ export default {
       font-size: 10pt;
       display: flex;
       flex-direction: row;
-      width: 10rem;
+      width: 60%;
       height: 1rem;
       margin-left: 0rem;
       margin-bottom: 1rem;
@@ -184,6 +199,7 @@ export default {
       margin-right: 0rem;
       margin-top: 1rem;
       margin-bottom: 1rem;
+      width: fit-content;
       font-size:.5em;
       height: 1rem;
       text-align: center;
@@ -201,5 +217,9 @@ export default {
       p{
         font-size: 1em;
       }
+      h2 {
+      text-align: left;
+      padding-left: 1100px;
+    }
     }
   </style>

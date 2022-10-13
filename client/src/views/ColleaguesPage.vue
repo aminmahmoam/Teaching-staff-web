@@ -117,6 +117,7 @@ export default {
       font-size: 13pt;
       height: 2rem;
       border: none;
+      border-radius: 5px;
     }
     .form-control{
       font-size: 18pt;
@@ -129,13 +130,13 @@ export default {
       margin-top: 0rem ;
       margin-right: 0rem;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 1000px) {
       .form-control{
-      font-size: 10pt;
+      font-size: 60%;
       display: flex;
       flex-direction: row;
-      width: 10rem;
-      height: 1rem;
+      width: 60%;
+      height: 1.5%;
       margin-left: 0rem;
       margin-bottom: 1rem;
       margin-top: 1rem ;
@@ -149,8 +150,9 @@ export default {
       margin-right: 0rem;
       margin-top: 1rem;
       margin-bottom: 1rem;
-      font-size: 5pt;
-      height: 1rem;
+      font-size: 6pt;
+      height: 1.2rem;
+      width: fit-content;
       text-align: center;
       }
       .btn2{
@@ -159,9 +161,13 @@ export default {
       margin-right: 0rem;
       margin-top: 1rem;
       margin-bottom: 1rem;
-      font-size: 5pt;
-      height: 1rem;
+      font-size: 6pt;
+      width: fit-content;
+      height: 1.2rem;
       text-align: center;
+      }
+      .form-group {
+        width: 85%;
       }
     }
     </style>

@@ -6,13 +6,13 @@
 <div class="data">
     <p>Name</p>
     <h3> {{staffFirstName}} {{staffLastName}}</h3>
-    <div class="space"></div>
+    <div id="space"></div>
     <p>Telephone Number</p>
     <h3> {{staffTelephone}}</h3>
-    <div class="space"></div>
+    <div id="space"></div>
     <p>Email Address</p>
     <h3> {{staffEmail}}</h3>
-    <div class="space"></div>
+    <div id="space"></div>
     <p>Home Address</p>
     <h3> {{staffAddress}}</h3>
 </div>
@@ -55,11 +55,11 @@ export default {
         }
       })
         .then(response => {
-          this.staffFirstName = response.data.firstName
-          this.staffLastName = response.data.lastName
-          this.staffAddress = response.data.address
-          this.staffTelephone = response.data.telephone
-          this.staffEmail = response.data.emailAddress
+          this.staffFirstName = response.data.staff.firstName
+          this.staffLastName = response.data.staff.lastName
+          this.staffAddress = response.data.staff.address
+          this.staffTelephone = response.data.staff.telephone
+          this.staffEmail = response.data.staff.emailAddress
         })
         .catch(error => {
           console.log(error)
@@ -83,17 +83,20 @@ export default {
   flex-direction: column;
   justify-content: space-between;
 }
-.space {
+#space {
   width: 150px;
   height: 4px;
   background-color: darkcyan;
-  margin: 45px;
+  margin-top: 45px;
+  margin-bottom: 45px;
+  margin-left: 15%;
+  margin-right: 50%;
 }
 .image {
   margin-left: 5rem;
 }
 
-@media(max-width:768px){
+@media(max-width:1000px){
   .profile{
  margin-left: 1rem;
  margin-right: 1rem;
@@ -108,18 +111,20 @@ export default {
   flex-direction: column;
   justify-content: space-between;
 }
-.space {
+#space {
   width: 150px;
   height: 1px;
   background-color: darkcyan;
-  margin: 70px;
+  text-align: center;
+  padding-left: 70%;
 }
   .image{
-    margin-left:0rem;
+    margin-left: 20%;
     margin-right:0rem;
     margin-top: 0rem;
     display: flex;
     flex-direction: column;
+    width: 60%;
   }
   h3{
     font-size: 1em;

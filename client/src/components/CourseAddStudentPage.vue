@@ -98,7 +98,7 @@ button {
   button:hover {
     opacity: 0.9;
   }
-@media (max-width: 768px){
+@media (max-width: 1000px){
   h2 {
   font-size: 1em;
   margin-top: 15px;

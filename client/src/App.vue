@@ -275,7 +275,7 @@ input ~ i {
     transition: opacity 0.4;
   }
 
-@media(max-width: 768px)
+@media(max-width: 1000px)
  {
   #app {
   font-family: 'Montserrat', Helvetica, Arial, sans-serif;
@@ -413,7 +413,7 @@ input ~ i {
     left: 70px;
   }
   .logout{
-    margin-left: 180px;
+    margin-left: 70%;
     margin-bottom: 2rem;
     letter-spacing: 1px;
     size: 2px;

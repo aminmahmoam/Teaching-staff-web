@@ -39,7 +39,7 @@ export default {
         }
       })
         .then(response => {
-          this.userName = response.data.firstName
+          this.userName = response.data.staff.firstName
         })
         .catch(error => {
           console.log(error)
@@ -70,10 +70,24 @@ export default {
     margin-top: 1rem;
     margin-left: 540px;
 }
-@media (max-width: 768px){
-  .user{
-    margin-left: 50px;
-  }
+@media (max-width: 1000px){
+.topbar {
+    width: 103%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    background-color: #f5f5f5;
+}
+.user {
+    display: flex;
+    margin-top: 1rem;
+    margin-left: 40%;
+}
+h3 {
+    font-size: 120%;
+}
+
 }
 
 </style>

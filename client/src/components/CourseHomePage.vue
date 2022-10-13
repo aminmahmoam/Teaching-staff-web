@@ -8,7 +8,7 @@
         <h2>{{courseName}}</h2>
         <h4>The home page is empty at the moment.</h4>
         <h5>Fell free to provide the needed information.</h5>
-        <textarea rows= "15" cols="125" type="text" name="input" placeholder="type here" required="required" v-model="givenText">
+        <textarea class="textArea" rows= "15" cols="125" type="text" name="input" placeholder="type here" required="required" v-model="givenText">
         </textarea>
         <div>
           <button @click="addTheText">Submit</button>
@@ -42,8 +42,8 @@ export default {
         }
       })
         .then(response => {
-          this.courseName = response.data.name
-          this.courseText = response.data.text
+          this.courseName = response.data.course.name
+          this.courseText = response.data.course.text
           if (this.courseText.trim().length === 0) {
             this.textExist = false
           } else {
@@ -60,7 +60,7 @@ export default {
       }
       )
         .then(response => {
-          this.courseText = response.data.text
+          this.courseText = response.data.course.text
           window.location.reload()
         })
         .catch(error => {
@@ -101,7 +101,7 @@ button {
   text-decoration-color: black;
   padding: 5px;
 }
-@media(max-width: 768px){
+@media(max-width: 1000px){
   h2 {
   font-size: 1em;
   margin-top: 15px;
@@ -138,6 +138,9 @@ textarea {
 input {
   width: 25px;
   height: 200px;
+}
+.textArea {
+  width: 80%;
 }
 }
 </style>
