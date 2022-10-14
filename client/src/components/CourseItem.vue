@@ -76,7 +76,7 @@ margin-bottom: 1rem;
   margin-right: 0;
   border-radius: 5px;
   background-image: linear-gradient(to
-    left, #dbfff9, white);
+    left, #dbfff9, #525e75);
 
   box-shadow: 0 7px 25px rgba(0,0,0, 0.08);
 }
