@@ -27,7 +27,10 @@ router.post('/api/login', (req,res,next) =>{
             emailAddress: staff.emailAddress,
             _id: staff._id
         },
-        process.env.JWT_KEY);
+        process.env.JWT_KEY,
+        {
+          expiresIn: "1h"
+        });
         console.log(token)
         return res.status(200).json({
             message: 'Authentication succussful',
