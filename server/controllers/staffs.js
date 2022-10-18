@@ -68,7 +68,7 @@ router.post('/api/staffs', function(req, res, next){
         emailAddress: req.body.emailAddress,
         address: req.body.address,
         password: hash,
-        paymentDate: req.body.paymentDate
+        paymentDates: req.body.paymentDates
       });
       staff.save()
       .then(result => {
@@ -236,6 +236,7 @@ router.put('/api/staffs/:id', checkAuth, function(req, res,next) {
         staff.telephone = req.body.telephone;
         staff.emailAddress= req.body.emailAddress;
         staff.address =req.body.address;
+        staff.paymentDates = req.body.paymentDates;
     staff.save()
     .then(result => {
       console.log(result);
