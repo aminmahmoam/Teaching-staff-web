@@ -8,7 +8,7 @@
     <button class="btn" @click="findStudent">Search</button>
     <button @submit.prevent="goBack()" class="btn" @click="goBack">Back</button>
     <button class="btn" @click="deleteAll">
-      Delete all students
+      Delete All
     </button>
     </div>
     <div class="tt" v-if="!searched">
